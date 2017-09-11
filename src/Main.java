@@ -24,10 +24,13 @@ public class Main extends Thread{
         while (true){
             time = System.nanoTime();
 
-            if (m.input.isPressed("up")) me.incrementY(false);
-            if (m.input.isPressed("down")) me.incrementY();
-            if (m.input.isPressed("left")) me.incrementX(false);
-            if (m.input.isPressed("right")) me.incrementX();
+            if (m.input.isPressed("up")) me.incrementDY(false);
+            if (m.input.isPressed("down")) me.incrementDY(true);
+            if (m.input.isPressed("left")) me.incrementDX(false);
+            if (m.input.isPressed("right")) me.incrementDX(true);
+
+            // Updates
+            me.update();
 
             timeElapsed = System.nanoTime()-time;
             if (timeElapsed < tickTime) Thread.sleep((long)(tickTime-timeElapsed)/1000000);
