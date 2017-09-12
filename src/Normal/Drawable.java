@@ -1,3 +1,5 @@
+package Normal;
+
 import java.awt.*;
 
 public interface Drawable {
@@ -8,12 +10,16 @@ public interface Drawable {
     /**
      * Get X in center of object
      */
-    double xC();
+    default double xC(){
+        return x()+width()/2;
+    };
 
     /**
      * Get Y in center of object
      */
-    double yC();
+    default double yC(){
+        return y()+height()/2;
+    };
 
     double width();
     double height();

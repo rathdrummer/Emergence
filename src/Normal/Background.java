@@ -1,9 +1,14 @@
+package Normal;
+
+import Normal.Drawable;
+import Normal.Img;
+
 import java.awt.*;
 
 /**
- * A static image that can be drawn thanks to the Drawable interface.
+ * A static image that can be drawn thanks to the Normal.Drawable interface.
  */
-public class Background implements Drawable{
+public class Background implements Drawable {
 
     private double x;
     private double y;

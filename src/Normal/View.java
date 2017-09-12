@@ -1,3 +1,5 @@
+package Normal;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.LinkedList;
@@ -9,8 +11,7 @@ public class View extends JFrame{
 
     private JPanel panel;
 
-    // Stack of all the drawable objects to be shown on screen, in order.
-    public LinkedList<Drawable> objectStack;
+    private LinkedList<Drawable> objectStack = new LinkedList<>();
 
     public View(){
 
@@ -42,7 +43,7 @@ public class View extends JFrame{
                 Thread.sleep(10);
             }
         }catch (InterruptedException e){
-            System.out.println("Error: View thread interrupted");
+            System.out.println("Error: Normal.View thread interrupted");
             System.exit(-1);
         }
     }
