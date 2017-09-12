@@ -87,7 +87,6 @@ public class Main extends JFrame {
 
     private void addThing(Drawable thing){
         objectStack.add(thing);
-        System.out.println(objectStack.toString());
         if (thing instanceof Collision) {
             collisions.add((Collision) thing);
         }

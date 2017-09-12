@@ -1,9 +1,6 @@
 package Normal;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.util.*;
 import java.util.List;
 
 
@@ -41,19 +38,6 @@ public class Player extends Collision implements Drawable{
     }
 
 
-    public void draw(Graphics2D g2d) {
-        double range = 0.1;
-
-        double scaleX = (1 - range/2) + range * ( (Math.abs(dx)/maxSpeed) - (Math.abs(dy)/maxSpeed) );
-        double scaleY = (1 - range/2) + range * ( (Math.abs(dy)/maxSpeed) - (Math.abs(dx)/maxSpeed) );
-
-        //sorry for the elm syntax, needed to view the function in a clear way
-        g2d.fillOval
-                ( (int)(x - (height * 0.5 * scaleX))
-                , (int)(y - (width * 0.5 * scaleY))
-                , (int) (height * scaleX)
-                , (int) (width * scaleY));
-    }
 
     public double clamp(double val, double range){
         return Math.max(-range, Math.min(range, val));
@@ -90,7 +74,7 @@ public class Player extends Collision implements Drawable{
         dx = friction(v.x);
         dy = friction(v.y);
 
-        Collision c = new Collision(x + dx, y + dy, height, width);
+        Collision c = new Collision(x + dx, y + dy, width, height);
 
         if (c.collides(boxes)) {
             //Check horizontal
@@ -159,11 +143,11 @@ public class Player extends Collision implements Drawable{
     }
 
     @Override
-    public double height() {        return height * scaleX;    }
+    public double height() { return height * scaleY; }
 
     @Override
     public double width() {
-        return width *scaleY;
+        return width *scaleX;
     }
 
     @Override

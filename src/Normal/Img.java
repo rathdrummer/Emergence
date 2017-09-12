@@ -10,8 +10,6 @@ import java.io.IOException;
  */
 public class Img {
 
-       // bg = loadImage("car-road-rug.jpg");
-       // player = loadImage("circle.png");
 
     public static Image loadImage(String name){
         Image image;

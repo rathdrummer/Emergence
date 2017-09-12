@@ -15,11 +15,6 @@ public class Box extends Collision implements Drawable{
         this.img = Img.loadImage("box.png");
     }
 
-
-    public void draw(Graphics2D g2d) {
-        g2d.fillRect(getX() - getWidth()/2, getY() - getHeight()/2, getWidth(), getHeight());
-    }
-
     @Override
     public double x() {
         return super.getX();
@@ -42,6 +37,6 @@ public class Box extends Collision implements Drawable{
 
     @Override
     public Image getImage() {
-        return null;
+        return img;
     }
 }
