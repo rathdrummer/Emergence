@@ -33,7 +33,7 @@ public abstract class Thing implements Drawable{
 
     public Thing(Collision c){ this.collision = c;}
 
-    public Collision getCollsion() {
+    public Collision getCollision() {
         return collision;
     }
 
@@ -144,4 +144,5 @@ public abstract class Thing implements Drawable{
     public void setImage(Image image){this.image = image;}
 
     public abstract void update(List<Thing> list);
+
 }
