@@ -17,6 +17,7 @@ public class Player extends Thing{
     private double scaleY;
 
     public Player(String name){
+        super(new Collision(100, 200, 0, 0));
         img = Img.loadImage(name);
         x = 100;
         y = 200;
@@ -29,6 +30,7 @@ public class Player extends Thing{
         scaleY = 1;
         height = img.getHeight(null);
         width = img.getWidth(null);
+        collision.updateSize(width,height);
     }
 
 
@@ -70,11 +72,6 @@ public class Player extends Thing{
         dy = friction(v.y);
 
         Collision c = Collision.speedBox(x,y,width, height, dx, dy);
-
-
-        if (dy > 0) {
-            System.out.println("hi");
-        }
 
         List<Thing> allPossibleCollisions = c.collidesWithThing(things, this);
 

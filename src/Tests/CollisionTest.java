@@ -49,16 +49,6 @@ public class CollisionTest {
     }
 
 
-    @Test
-    public void isPositionUpdating() {
-        Collision first  = new Collision(0,0,30,30);
-
-        Assert.assertTrue(first.getX() == 0 && first.getY() == 0 && first.getWidth() == 30 && first.getHeight() == 30);
-
-        first.updatePosition(15, 5);
-
-        Assert.assertTrue(first.getX() == 15 && first.getY() == 5 && first.getWidth() == 30 && first.getHeight() == 30);
-    }
 
     @Test
     public void collidesWith() {

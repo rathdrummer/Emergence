@@ -1,14 +1,13 @@
 package Normal;
 
 import java.awt.*;
-import java.util.*;
 import java.util.List;
 
 /**
  * Created by oskar on 2017-09-12.
  * This classes has some inputs and outputs
  */
-public class Box extends Thing implements Drawable{
+public class Box extends Thing {
 
     private Image img;
 

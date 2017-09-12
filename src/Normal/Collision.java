@@ -49,6 +49,7 @@ public class Collision {
     }
 
     public boolean collides (Thing thing) {
+
         return this.collides(thing.getCollsion());
     }
 
@@ -192,25 +193,14 @@ public class Collision {
         return Math.sqrt( Math.pow(c.x - x, 2) + Math.pow(c.y - y, 2) );
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
     public void updatePosition(double x, double y) {
         this.x = (int) x;
         this.y = (int) y;
+    }
+
+    public void updateSize(double width, double height) {
+        this.width = (int) width;
+        this.height = (int) height;
     }
 
 }

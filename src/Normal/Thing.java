@@ -31,6 +31,8 @@ public abstract class Thing implements Drawable{
     protected double flammability = 1;
 
 
+    public Thing(Collision c){ this.collision = c;}
+
     public Collision getCollsion() {
         return collision;
     }

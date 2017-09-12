@@ -104,10 +104,10 @@ public class Main extends JFrame {
 
     }
 
-    private void addThing(Drawable thing){
-        objectStack.add(thing);
-        if (thing instanceof Thing) {
-            things.add((Thing) thing);
+    private void addThing(Drawable d){
+        objectStack.add(d);
+        if (d instanceof Thing) {
+            things.add((Thing) d);
         }
     }
 
