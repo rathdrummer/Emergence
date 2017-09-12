@@ -50,7 +50,7 @@ public class Collision {
 
     public boolean collides (Thing thing) {
 
-        return this.collides(thing.getCollsion());
+        return this.collides(thing.getCollision());
     }
 
     public boolean collides(List<Collision> collisions) {
@@ -77,7 +77,7 @@ public class Collision {
         List<Thing> thoseWhoCollides = new ArrayList<>();
 
         for (Thing t : things) {
-            if (this.collides(t.getCollsion())) {
+            if (this.collides(t.getCollision())) {
                 thoseWhoCollides.add(t);
             }
         }
@@ -89,7 +89,7 @@ public class Collision {
         List<Thing> thoseWhoCollides = new ArrayList<>();
 
         for (Thing t : things) {
-            if (this.collides(t.getCollsion())) {
+            if (this.collides(t.getCollision())) {
 
                 if (t.getClass() == cl) {
                     thoseWhoCollides.add(t);
@@ -179,7 +179,7 @@ public class Collision {
     }
 
     public double distanceThing(Thing t) {
-        return distance(t.getCollsion());
+        return distance(t.getCollision());
     }
 
     public double distance(Collision c) {

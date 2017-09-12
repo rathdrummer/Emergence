@@ -32,7 +32,7 @@ public abstract class Thing implements Drawable{
 
     public Thing(Collision c){ this.collision = c;}
 
-    public Collision getCollsion() {
+    public Collision getCollision() {
         return collision;
     }
 
