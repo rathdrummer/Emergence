@@ -37,6 +37,19 @@ public class CollisionTest {
     }
 
     @Test
+    public void findsClass() {
+        Collision first = new Collision(0,0,30,30);
+        Collision second = new Collision(15,15,30,30);
+
+        List<Collision> list = new ArrayList<>();
+        list.add(second);
+
+        Assert.assertFalse(first.collidesWith(list, Collision.class).isEmpty());
+
+    }
+
+
+    @Test
     public void isPositionUpdating() {
         Collision first  = new Collision(0,0,30,30);
 

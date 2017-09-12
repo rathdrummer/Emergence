@@ -60,6 +60,20 @@ public class Collision {
         return false;
     }
 
+    public List<Collision> collidesWith(List<Collision> collisions, Class cl) {
+        List<Collision> thoseWhoCollides = new ArrayList<>();
+
+        for (Collision c : collisions) {
+            if (collides(c)){
+                if (c.getClass() == cl) {
+                    thoseWhoCollides.add(c);
+                }
+            }
+        }
+
+        return thoseWhoCollides;
+    }
+
     /***
      * Sometimes we want to know who we are colliding with
      * @param collisions: All possible collisions
