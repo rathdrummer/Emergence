@@ -58,7 +58,7 @@ public class Player extends Thing{
     }
 
     @Override
-    public void update(List<Thing> boxes){
+    public void update(List<Thing> things){
 
         double range = 0.1;
 
@@ -69,27 +69,51 @@ public class Player extends Thing{
         dx = friction(v.x);
         dy = friction(v.y);
 
-        Collision c = new Collision(x + dx, y + dy, width, height);
+        Collision c = Collision.speedBox(x,y,width, height, dx, dy);
 
-        if (c.collides(boxes)) {
-            //Check horizontal
-            c.updatePosition(x+dx, y);
 
-            if (c.collides(boxes)){
-                dx=0;
-                //Check vertical
-                c.updatePosition(x, y+dy);
-                if (c.collides(boxes)) {
-                    dy = 0;
-                }
-            }
-            else {
-                dy = 0;
-            }
+        if (dy > 0) {
+            System.out.println("hi");
         }
 
-        y += dy;
-        x += dx;
+        List<Thing> allPossibleCollisions = c.collidesWithThing(things, this);
+
+        //x direction
+        int newDX = (int) dx;
+        int oldSign = (int) Math.signum(dx);
+
+        c = Collision.speedBox(x, y, width, height, newDX, 0);
+        List<Thing> allXCollisions = c.collidesWithThing(allPossibleCollisions, this);
+
+
+        while(!allXCollisions.isEmpty() && newDX != 0) {
+            newDX -= Math.signum(dx);
+            if (Math.signum(newDX) != oldSign) {
+                newDX = 0;
+            }
+            c = Collision.speedBox(x,y,width,height, newDX, 0);
+            allXCollisions = c.collidesWithThing(allXCollisions, this);
+        }
+
+        x += newDX;
+
+        //y direction
+        int newDY = (int) dy;
+        oldSign = (int) Math.signum(dy);
+
+        c = Collision.speedBox(x, y, width, height, 0, newDY);
+        List<Thing> allYCollisions = c.collidesWithThing(allPossibleCollisions, this);
+
+        while(!allYCollisions.isEmpty() && newDY != 0) {
+            newDY -= Math.signum(dy);
+            if (Math.signum(newDX) != oldSign) {
+                newDX = 0;
+            }
+            c = Collision.speedBox(x,y,width,height, 0, newDY);
+            allYCollisions = c.collidesWithThing(allYCollisions, this);
+        }
+
+        y += newDY;
     }
 
     public void incrementX(boolean direction){

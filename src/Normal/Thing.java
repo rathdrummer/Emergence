@@ -30,7 +30,6 @@ public abstract class Thing implements Drawable{
 
     protected double flammability = 1;
 
-    private Collision collision = null;
 
     public Collision getCollsion() {
         return collision;
