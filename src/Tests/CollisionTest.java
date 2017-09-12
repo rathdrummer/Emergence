@@ -37,15 +37,18 @@ public class CollisionTest {
     }
 
     @Test
-    public void isPositionUpdating() {
-        Collision first  = new Collision(0,0,30,30);
+    public void findsClass() {
+        Collision first = new Collision(0,0,30,30);
+        Collision second = new Collision(15,15,30,30);
 
-        Assert.assertTrue(first.getX() == 0 && first.getY() == 0 && first.getWidth() == 30 && first.getHeight() == 30);
+        List<Collision> list = new ArrayList<>();
+        list.add(second);
 
-        first.updatePosition(15, 5);
+        Assert.assertFalse(first.collidesWith(list, Collision.class).isEmpty());
 
-        Assert.assertTrue(first.getX() == 15 && first.getY() == 5 && first.getWidth() == 30 && first.getHeight() == 30);
     }
+
+
 
     @Test
     public void collidesWith() {

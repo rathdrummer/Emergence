@@ -11,7 +11,7 @@ public class Main extends JFrame {
     private Backend controller;
     private Player player;
     private CameraFollower cam;
-    private List<Collision> collisions = new ArrayList<>();
+    private List<Thing> things = new ArrayList<>();
 
     // Stack of all the drawable objects to be shown on screen, in order.
     public LinkedList<Drawable> objectStack = new LinkedList<>();
@@ -65,7 +65,7 @@ public class Main extends JFrame {
         if (controller.isPressed(Keys.RIGHT)) player.incrementDX(true);
 
         // Updates
-        player.update(collisions);
+        player.update(things);
         cam.update();
         updateOffset(cam.x()-this.getContentPane().getWidth()/2,cam.y()-this.getContentPane().getHeight()/2); // Follow the player
     }
@@ -104,10 +104,10 @@ public class Main extends JFrame {
 
     }
 
-    private void addThing(Drawable thing){
-        objectStack.add(thing);
-        if (thing instanceof Collision) {
-            collisions.add((Collision) thing);
+    private void addThing(Drawable d){
+        objectStack.add(d);
+        if (d instanceof Thing) {
+            things.add((Thing) d);
         }
     }
 

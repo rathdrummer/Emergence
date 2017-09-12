@@ -10,10 +10,12 @@ public class Blob extends Thing{
     private double xGoal;
     private double yGoal;
 
-    public Blob() {
+    public Blob(double x, double y) {
+        super(new Collision(x, y, 0,0));
         this.setImage(Img.loadImage("blob"));
-        this.x = 500;
-        this.y = 500;
+        this.x = x;
+        this.y = y;
+        collision.updateSize(image.getWidth(null),image.getHeight(null));
     }
 
     @Override

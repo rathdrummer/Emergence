@@ -17,6 +17,7 @@ public class Player extends Thing{
     private double scaleY;
 
     public Player(String name){
+        super(new Collision(100, 200, 0, 0));
         img = Img.loadImage(name);
         x = 100;
         y = 200;
@@ -29,6 +30,7 @@ public class Player extends Thing{
         scaleY = 1;
         height = img.getHeight(null);
         width = img.getWidth(null);
+        collision.updateSize(width,height);
     }
 
 
@@ -71,15 +73,15 @@ public class Player extends Thing{
 
         Collision c = new Collision(x + dx, y + dy, width, height);
 
-        if (c.collides(boxes)) {
+        if (c.collidesThing(boxes)) {
             //Check horizontal
             c.updatePosition(x+dx, y);
 
-            if (c.collides(boxes)){
+            if (c.collidesThing(boxes)){
                 dx=0;
                 //Check vertical
                 c.updatePosition(x, y+dy);
-                if (c.collides(boxes)) {
+                if (c.collidesThing(boxes)) {
                     dy = 0;
                 }
             }
