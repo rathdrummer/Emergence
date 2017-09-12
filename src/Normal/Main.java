@@ -10,17 +10,28 @@ public class Main extends JFrame {
 
     private Backend controller;
     private Player player;
+    private CameraFollower cam;
     private List<Collision> collisions = new ArrayList<>();
 
     // Stack of all the drawable objects to be shown on screen, in order.
     public LinkedList<Drawable> objectStack = new LinkedList<>();
 
+    // Camera offset - lets the camera follow the player or anything else
+    private double xOffset = 0;
+    private double yOffset = 0;
+
+    /*
+    // Maybe we will need to store the size of the area so we know when to stop scrolling with the camera
+    private Area area;
+    */
+
     public Main(){
         player = new Player("circle.png");
 
+        cam = new CameraFollower(player);
 
 
-        addThing(new Background("car-road-rug.jpg"));
+        addThing(new Area("car-road-rug.jpg"));
         addThing(new Box(200,200, 30, 30));
         addThing(new Box(200,230, 30, 30));
         addThing(new Box(200,260, 30, 30));
@@ -55,6 +66,8 @@ public class Main extends JFrame {
 
         // Updates
         player.update(collisions);
+        cam.update();
+        updateOffset(cam.x()-this.getContentPane().getWidth()/2,cam.y()-this.getContentPane().getHeight()/2); // Follow the player
     }
 
     public void run() {
@@ -63,8 +76,14 @@ public class Main extends JFrame {
 
     public void render(Graphics2D g2d) {
 
+        // Apply camera offset while drawing
         for (Drawable d : objectStack){
-            g2d.drawImage(d.getImage(), (int)d.x(), (int)d.y(), (int)d.width(), (int)d.height(), null) ;
+            g2d.drawImage(d.getImage(),
+                    (int)(d.x()-xOffset),
+                    (int)(d.y()-yOffset),
+                    (int)d.width(),
+                    (int)d.height(),
+                    null) ;
         }
 
     }
@@ -91,4 +110,19 @@ public class Main extends JFrame {
             collisions.add((Collision) thing);
         }
     }
+
+
+    private void updateOffset(double xOffset,double yOffset){
+            this.xOffset = xOffset;
+            this.yOffset = yOffset;
+
+    }
+
+    /**
+     * Moves the camera offset so the camera is looking at the centre of a drawable
+     */
+    private void updateOffset(Drawable drawable){
+        updateOffset(drawable.xC()-this.getContentPane().getWidth()/2,drawable.yC()-this.getContentPane().getHeight()/2);
+    }
+
 }

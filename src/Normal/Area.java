@@ -6,16 +6,16 @@ import Normal.Img;
 import java.awt.*;
 
 /**
- * A static image that can be drawn thanks to the Normal.Drawable interface.
+ * A static image that can be drawn as a background area. Renamed from Background.
  */
-public class Background implements Drawable {
+public class Area implements Drawable {
 
     private double x;
     private double y;
     private Image i;
 
 
-    public Background(String filename){
+    public Area(String filename){
         //Load image
         i = Img.loadImage(filename);
         x=0;

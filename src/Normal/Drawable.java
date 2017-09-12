@@ -4,6 +4,8 @@ import java.awt.*;
 
 public interface Drawable {
 
+    // What if a common update() method was put in every drawable....
+
     double x();
     double y();
 

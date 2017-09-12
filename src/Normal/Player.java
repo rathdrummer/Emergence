@@ -160,14 +160,15 @@ public class Player extends Collision implements Drawable{
         return y;
     }
 
+
     @Override
     public double xC() {
-        return (int)(x - (height * 0.5 * scaleX));
+        return (int)(x + (height * 0.5 * scaleX));
     }
 
     @Override
     public double yC() {
-        return (int)(y - (width * 0.5 * scaleY));
+        return (int)(y + (width * 0.5 * scaleY));
     }
 
     @Override
