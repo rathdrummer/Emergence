@@ -48,11 +48,23 @@ public class Collision {
         return (xOverlap && yOverlap);
     }
 
+    public boolean collides (Thing thing) {
+        return this.collides(thing.getCollsion());
+    }
 
     public boolean collides(List<Collision> collisions) {
-
         for (Collision c : collisions) {
-            if (collides(c)) {
+            if (this.collides(c)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean collidesThing(List<Thing> things) {
+
+        for (Thing t : things) {
+            if (this.collides(t)) {
                 return true;
             }
         }
@@ -60,19 +72,33 @@ public class Collision {
         return false;
     }
 
-    public List<Collision> collidesWith(List<Collision> collisions, Class cl) {
-        List<Collision> thoseWhoCollides = new ArrayList<>();
+    public List<Thing> collidesWithThing(List<Thing> things) {
+        List<Thing> thoseWhoCollides = new ArrayList<>();
 
-        for (Collision c : collisions) {
-            if (collides(c)){
-                if (c.getClass() == cl) {
-                    thoseWhoCollides.add(c);
+        for (Thing t : things) {
+            if (this.collides(t.getCollsion())) {
+                thoseWhoCollides.add(t);
+            }
+        }
+
+        return thoseWhoCollides;
+    }
+
+    public List<Thing> collidesWithThing(List<Thing> things, Class cl) {
+        List<Thing> thoseWhoCollides = new ArrayList<>();
+
+        for (Thing t : things) {
+            if (this.collides(t.getCollsion())) {
+
+                if (t.getClass() == cl) {
+                    thoseWhoCollides.add(t);
                 }
             }
         }
 
         return thoseWhoCollides;
     }
+
 
     /***
      * Sometimes we want to know who we are colliding with
@@ -85,6 +111,20 @@ public class Collision {
         collisions.forEach(c -> {
             if (collides(c)){
                 thoseWhoCollides.add(c);
+            }
+        });
+
+        return thoseWhoCollides;
+    }
+
+    public List<Collision> collidesWith(List<Collision> collisions, Class cl) {
+        List<Collision> thoseWhoCollides = new ArrayList<>();
+
+        collisions.forEach(c -> {
+            if (collides(c)){
+                if (c.getClass() == cl) {
+                    thoseWhoCollides.add(c);
+                }
             }
         });
 
@@ -114,6 +154,33 @@ public class Collision {
         return closest;
     }
 
+    public Thing closestThing(List<Thing> things) {
+        double closestDistance = 0;
+        Thing closest = null;
+
+        for(Thing t : things) {
+
+            double distance = distanceThing(t);
+
+            if (closest == null) {
+                closest = t;
+                closestDistance = distance;
+            }
+            else {
+                if (distance < closestDistance){
+                    closest = t;
+                    closestDistance = distance;
+                }
+            }
+        }
+
+        return closest;
+    }
+
+    public double distanceThing(Thing t) {
+        return distance(t.getCollsion());
+    }
+
     public double distance(Collision c) {
         return Math.sqrt( Math.pow(c.x - x, 2) + Math.pow(c.y - y, 2) );
     }
@@ -139,11 +206,4 @@ public class Collision {
         this.y = (int) y;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
 }

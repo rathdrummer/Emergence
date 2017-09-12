@@ -20,6 +20,12 @@ public abstract class Thing implements Drawable{
 
     private double flammability = 1;
 
+    private Collision collision = null;
+
+    public Collision getCollsion() {
+        return collision;
+    }
+
     public double x() {
         return x;
     }
