@@ -30,24 +30,11 @@ public abstract class Thing implements Drawable{
 
     protected double flammability = 1;
 
+
     public Thing(Collision c){ this.collision = c;}
 
     public Collision getCollision() {
         return collision;
-    }
-
-    public boolean collides(Thing other){
-        if (this == other) return false;
-        return this.collision.collides(other);
-    }
-
-    public boolean collides(List<Thing> list){
-        for (Thing c : list) {
-            if (this.collides(c)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public double x() {
@@ -157,4 +144,5 @@ public abstract class Thing implements Drawable{
     public void setImage(Image image){this.image = image;}
 
     public abstract void update(List<Thing> list);
+
 }

@@ -62,10 +62,10 @@ public class Collision {
         return false;
     }
 
-    public boolean collidesThing(List<Thing> things) {
+    public boolean collidesThing(List<Thing> things, Thing me) {
 
         for (Thing t : things) {
-            if (this.collides(t)) {
+            if ((t != me) && this.collides(t)) {
                 return true;
             }
         }
@@ -73,11 +73,12 @@ public class Collision {
         return false;
     }
 
-    public List<Thing> collidesWithThing(List<Thing> things) {
+    public List<Thing> collidesWithThing(List<Thing> things, Thing me) {
         List<Thing> thoseWhoCollides = new ArrayList<>();
 
         for (Thing t : things) {
-            if (this.collides(t.getCollision())) {
+
+            if (t != me && this.collides(t.getCollision())) {
                 thoseWhoCollides.add(t);
             }
         }
@@ -85,11 +86,12 @@ public class Collision {
         return thoseWhoCollides;
     }
 
-    public List<Thing> collidesWithThing(List<Thing> things, Class cl) {
+    public List<Thing> collidesWithThing(List<Thing> things, Class cl, Thing me) {
         List<Thing> thoseWhoCollides = new ArrayList<>();
 
         for (Thing t : things) {
-            if (this.collides(t.getCollision())) {
+
+            if (this.collides(t.getCollision()) && (t != me)) {
 
                 if (t.getClass() == cl) {
                     thoseWhoCollides.add(t);
@@ -130,6 +132,13 @@ public class Collision {
         });
 
         return thoseWhoCollides;
+    }
+
+    public static Collision speedBox(double x, double y, double width, double height, double dx, double dy) {
+        double transX = (dx > 0) ? 0 : -dx;
+        double transY = (dy > 0) ? 0 : -dy;
+
+        return new Collision(x + transX, y + transY, width + Math.abs(dx), height + Math.abs(dy));
     }
 
     public Collision closest(List<Collision> collisions) {
