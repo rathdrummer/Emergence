@@ -1,29 +1,29 @@
 package Normal;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.util.*;
 import java.util.List;
 
 
 /**
  * Represents the player
  */
-public class Player extends JPanel {
+public class Player extends Collision implements Drawable{
+
     private double x ;
     private double y ;
     private double dx;
     private double dy;
     private double acceleration;
     private double maxSpeed;
-    private double size = 30;
-
-    private String name ;
+    private double height;
+    private double width;
+    private Image img;
     private double frictionAcc;
+    private double scaleX;
+    private double scaleY;
 
     public Player(String name){
-        this.name = name;
+        img = Img.loadImage(name);
         x = 100;
         y = 200;
         dx = 0;
@@ -31,35 +31,13 @@ public class Player extends JPanel {
         acceleration = 1;
         maxSpeed = 7;
         frictionAcc = 0.5;
+        scaleX = 1;
+        scaleY = 1;
+        height = img.getHeight(null);
+        width = img.getWidth(null);
     }
 
-    @Override
-    public void paint(Graphics g){
-        super.paint(g);
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
 
-        AffineTransform savedForm = g2d.getTransform();
-
-        draw(g2d);
-
-        g2d.setTransform(savedForm);
-
-    }
-
-    public void draw(Graphics2D g2d) {
-        double range = 0.1;
-
-        double scaleX = (1 - range/2) + range * ( (Math.abs(dx)/maxSpeed) - (Math.abs(dy)/maxSpeed) );
-        double scaleY = (1 - range/2) + range * ( (Math.abs(dy)/maxSpeed) - (Math.abs(dx)/maxSpeed) );
-
-        //sorry for the elm syntax, needed to view the function in a clear way
-        g2d.fillOval
-                ( (int)(x - (size * 0.5 * scaleX))
-                        , (int)(y - (size * 0.5 * scaleY))
-                        , (int) (size * scaleX)
-                        , (int) (size * scaleY));
-    }
 
     public double clamp(double val, double range){
         return Math.max(-range, Math.min(range, val));
@@ -87,11 +65,16 @@ public class Player extends JPanel {
 
     public void update(List<Collision> boxes){
 
+        double range = 0.1;
+
+        scaleX = (1 - range/2) + range * ( (Math.abs(dx)/maxSpeed) - (Math.abs(dy)/maxSpeed) );
+        scaleY = (1 - range/2) + range * ( (Math.abs(dy)/maxSpeed) - (Math.abs(dx)/maxSpeed) );
+
         Vector v = clamp2(dx,dy,maxSpeed);
         dx = friction(v.x);
         dy = friction(v.y);
 
-        Collision c = new Collision(x + dx, y + dy, size, size);
+        Collision c = new Collision(x + dx, y + dy, width, height);
 
         if (c.collides(boxes)) {
             //Check horizontal
@@ -157,5 +140,39 @@ public class Player extends JPanel {
             this.x = x;
             this.y = y;
         }
+    }
+
+    @Override
+    public double height() { return height * scaleY; }
+
+    @Override
+    public double width() {
+        return width *scaleX;
+    }
+
+    @Override
+    public double x() {
+        return x;
+    }
+
+    @Override
+    public double y() {
+        return y;
+    }
+
+
+    @Override
+    public double xC() {
+        return (int)(x + (height * 0.5 * scaleX));
+    }
+
+    @Override
+    public double yC() {
+        return (int)(y + (width * 0.5 * scaleY));
+    }
+
+    @Override
+    public Image getImage() {
+        return img;
     }
 }

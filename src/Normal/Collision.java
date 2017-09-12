@@ -15,6 +15,13 @@ public class Collision {
     private int width;
     private int height;
 
+    public Collision() {
+        this.x = 0;
+        this.y = 0;
+        this.width = 0;
+        this.height = 0;
+    }
+
     public Collision(int x, int y, int width, int height) {
         this.x = x;
         this.y = y;
@@ -32,6 +39,8 @@ public class Collision {
     }
 
     public boolean collides(Collision other) {
+
+        if (other == this) return false;
 
         boolean xOverlap = (Math.max(x + width, other.x + other.width) - Math.min(x, other.x) < width + other.width);
         boolean yOverlap = (Math.max(y + height, other.y + other.height) - Math.min(y, other.y) < height + other.height);
@@ -114,5 +123,13 @@ public class Collision {
     public void updatePosition(double x, double y) {
         this.x = (int) x;
         this.y = (int) y;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 }
