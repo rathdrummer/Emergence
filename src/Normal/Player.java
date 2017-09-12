@@ -1,24 +1,31 @@
+package Normal;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.util.*;
+import java.util.List;
+
 
 /**
  * Represents the player
  */
 public class Player extends JPanel {
-    public double x ;
-    public double y ;
-    public double dx;
-    public double dy;
-    public double acceleration;
-    public double maxSpeed;
+    private double x ;
+    private double y ;
+    private double dx;
+    private double dy;
+    private double acceleration;
+    private double maxSpeed;
+    private double size = 30;
 
-    public String name ;
+    private String name ;
     private double frictionAcc;
 
     public Player(String name){
         this.name = name;
-        x = 0;
-        y = 0;
+        x = 100;
+        y = 200;
         dx = 0;
         dy = 0;
         acceleration = 1;
@@ -31,19 +38,27 @@ public class Player extends JPanel {
         super.paint(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
-        double transX =  (20* (Math.abs(dx)/maxSpeed));
-        double transY = (20* (Math.abs(dy)/maxSpeed));
 
-        if (transX > 0 || transY > 0) {
-            if (transX > transY) {
-                transY -= transX;
-                System.out.println(transY);
-            } else {
-                transX -= transY;
-            }
-        }
-        g2d.fillOval((int)x - (int) (transX/2), (int)y - (int) (transY/2), 30 + (int) transX, 30 + (int) transY);
+        AffineTransform savedForm = g2d.getTransform();
 
+        draw(g2d);
+
+        g2d.setTransform(savedForm);
+
+    }
+
+    public void draw(Graphics2D g2d) {
+        double range = 0.1;
+
+        double scaleX = (1 - range/2) + range * ( (Math.abs(dx)/maxSpeed) - (Math.abs(dy)/maxSpeed) );
+        double scaleY = (1 - range/2) + range * ( (Math.abs(dy)/maxSpeed) - (Math.abs(dx)/maxSpeed) );
+
+        //sorry for the elm syntax, needed to view the function in a clear way
+        g2d.fillOval
+                ( (int)(x - (size * 0.5 * scaleX))
+                        , (int)(y - (size * 0.5 * scaleY))
+                        , (int) (size * scaleX)
+                        , (int) (size * scaleY));
     }
 
     public double clamp(double val, double range){
@@ -70,11 +85,30 @@ public class Player extends JPanel {
         return val;
     }
 
-    public void update( ){
+    public void update(List<Collision> boxes){
 
         Vector v = clamp2(dx,dy,maxSpeed);
         dx = friction(v.x);
         dy = friction(v.y);
+
+        Collision c = new Collision(x + dx, y + dy, size, size);
+
+        if (c.collides(boxes)) {
+            //Check horizontal
+            c.updatePosition(x+dx, y);
+
+            if (c.collides(boxes)){
+                dx=0;
+                //Check vertical
+                c.updatePosition(x, y+dy);
+                if (c.collides(boxes)) {
+                    dy = 0;
+                }
+            }
+            else {
+                dy = 0;
+            }
+        }
 
         y += dy;
         x += dx;
