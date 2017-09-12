@@ -73,6 +73,7 @@ public class Player extends Thing{
 
         Collision c = Collision.speedBox(x,y,width, height, dx, dy);
 
+
         List<Thing> allPossibleCollisions = c.collidesWithThing(things, this);
 
         //x direction
@@ -103,12 +104,13 @@ public class Player extends Thing{
 
         while(!allYCollisions.isEmpty() && newDY != 0) {
             newDY -= Math.signum(dy);
-            if (Math.signum(newDX) != oldSign) {
-                newDX = 0;
+            if (Math.signum(newDY) != oldSign) {
+                newDY = 0;
             }
             c = Collision.speedBox(x,y,width,height, 0, newDY);
             allYCollisions = c.collidesWithThing(allYCollisions, this);
         }
+
 
         y += newDY;
     }

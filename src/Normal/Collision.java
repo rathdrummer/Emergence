@@ -85,6 +85,22 @@ public class Collision {
         return thoseWhoCollides;
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
     public List<Thing> collidesWithThing(List<Thing> things, Class cl, Thing me) {
         List<Thing> thoseWhoCollides = new ArrayList<>();
 
@@ -133,8 +149,8 @@ public class Collision {
     }
 
     public static Collision speedBox(double x, double y, double width, double height, double dx, double dy) {
-        double transX = (dx > 0) ? 0 : -dx;
-        double transY = (dy > 0) ? 0 : -dy;
+        double transX = (dx > 0) ? 0 : dx;
+        double transY = (dy > 0) ? 0 : dy;
 
         return new Collision(x + transX, y + transY, width + Math.abs(dx), height + Math.abs(dy));
     }
