@@ -7,16 +7,10 @@ import java.util.List;
 /**
  * Represents the player
  */
-public class Player extends Collision implements Drawable{
+public class Player extends Thing{
 
-    private double x ;
-    private double y ;
-    private double dx;
-    private double dy;
     private double acceleration;
     private double maxSpeed;
-    private double height;
-    private double width;
     private Image img;
     private double frictionAcc;
     private double scaleX;
@@ -63,7 +57,8 @@ public class Player extends Collision implements Drawable{
         return val;
     }
 
-    public void update(List<Collision> boxes){
+    @Override
+    public void update(List<Thing> boxes){
 
         double range = 0.1;
 

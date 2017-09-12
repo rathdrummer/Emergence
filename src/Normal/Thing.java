@@ -1,39 +1,41 @@
 package Normal;
 
+import java.util.List;
+import java.awt.*;
 
+/**
+ * The overarching class for all things in-game.
+ */
 public abstract class Thing implements Drawable{
 
-    private double x = 0;
-    private double y = 0;
-    private double dx = 0;
-    private double dy = 0;
-    private double width = 1;
-    private double height = 1;
-    private double weight = 10;
+    protected double x = 0;
+    protected double y = 0;
+    protected double dx = 0;
+    protected double dy = 0;
+    protected double width = 1;
+    protected double height = 1;
 
-    private boolean alive = false;
+    protected Image image;
+    protected Collision collision;
 
-    private double strength = 10;
-    private double intelligence = 10;
-    private double maxHP = 10;
-    private double armor = 0;
+    protected double weight = 10;
 
-    private double flammability = 1;
+    protected boolean alive = false;
+
+    protected double strength = 10;
+    protected double intelligence = 10;
+    protected double hp;
+    protected double maxHP = 10;
+    protected double armor = 0;
+
+    protected double flammability = 1;
 
     public double x() {
         return x;
     }
 
-    public void setX(double x) {
-        this.x = x;
-    }
-
     public double y() {
         return y;
-    }
-
-    public void setY(double y) {
-        this.y = y;
     }
 
     public double dx() {
@@ -123,4 +125,16 @@ public abstract class Thing implements Drawable{
     public void setFlammability(double flammability) {
         this.flammability = flammability;
     }
+
+    public double hp(){return hp;}
+
+    public void setHP(double hp){this.hp = hp;}
+
+    public Image getImage(){
+        return image;
+    }
+
+    public void setImage(Image image){this.image = image;}
+
+    public abstract void update(List<Thing> list);
 }
