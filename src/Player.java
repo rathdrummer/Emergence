@@ -4,7 +4,7 @@ import java.awt.*;
 /**
  * Represents the player
  */
-public class Player extends JPanel {
+public class Player implements Drawable {
     public double x ;
     public double y ;
     public double dx;
@@ -12,11 +12,14 @@ public class Player extends JPanel {
     public double acceleration;
     public double maxSpeed;
 
-    public String name ;
     private double frictionAcc;
 
-    public Player(String name){
-        this.name = name;
+    private Image image;
+    private double transX;
+    private double transY;
+
+    public Player(String filename){
+        image = Img.loadImage(filename);
         x = 0;
         y = 0;
         dx = 0;
@@ -26,23 +29,17 @@ public class Player extends JPanel {
         frictionAcc = 0.5;
     }
 
-    @Override
     public void paint(Graphics g){
-        super.paint(g);
+        //super.paint(g);
+
+        //g.drawImage(Img.loadImage("circle.jpg"), (int) (x - transX / 2), (int) (y - transY / 2), (int) (30 + transX), (int) (30 + transY), null);
+
+        /*
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
-        double transX =  (20* (Math.abs(dx)/maxSpeed));
-        double transY = (20* (Math.abs(dy)/maxSpeed));
 
-        if (transX > 0 || transY > 0) {
-            if (transX > transY) {
-                transY -= transX;
-                System.out.println(transY);
-            } else {
-                transX -= transY;
-            }
-        }
         g2d.fillOval((int)x - (int) (transX/2), (int)y - (int) (transY/2), 30 + (int) transX, 30 + (int) transY);
+        */
 
     }
 
@@ -71,6 +68,17 @@ public class Player extends JPanel {
     }
 
     public void update( ){
+
+        transX =  (20* (Math.abs(dx)/maxSpeed));
+        transY = (20* (Math.abs(dy)/maxSpeed));
+
+        if (transX > 0 || transY > 0) {
+            if (transX > transY) {
+                transY -= transX;
+            } else {
+                transX -= transY;
+            }
+        }
 
         Vector v = clamp2(dx,dy,maxSpeed);
         dx = friction(v.x);
@@ -123,5 +131,40 @@ public class Player extends JPanel {
             this.x = x;
             this.y = y;
         }
+    }
+
+    @Override
+    public double height() {
+        return image.getHeight(null)-(int)transX;
+    }
+
+    @Override
+    public double width() {
+        return image.getWidth(null)-(int)transY;
+    }
+
+    @Override
+    public double x() {
+        return x;
+    }
+
+    @Override
+    public double y() {
+        return y;
+    }
+
+    @Override
+    public double xC() {
+        return x+(double)(image.getHeight(null))/2;
+    }
+
+    @Override
+    public double yC() {
+        return y+(double)(image.getWidth(null))/2;
+    }
+
+    @Override
+    public Image getImage() {
+        return image;
     }
 }
