@@ -35,30 +35,6 @@ public class Player extends Thing{
 
 
 
-    public double clamp(double val, double range){
-        return Math.max(-range, Math.min(range, val));
-    }
-
-    public Vector clamp2(double x, double y, double max){
-        double hyp = Math.sqrt(Math.pow(x,2)+Math.pow(y,2));
-        if (hyp > max) {
-            double ratio = hyp / max;
-            x /= ratio;
-            y /= ratio;
-        }
-        return new Vector(x,y);
-    }
-
-    public double friction(double val){
-        if (Math.abs(val) <= frictionAcc){
-            val = 0;
-        } else {
-            val-=Math.signum(val)* frictionAcc;
-        }
-
-        return val;
-    }
-
     @Override
     public void update(List<Thing> things){
 
@@ -67,53 +43,12 @@ public class Player extends Thing{
         scaleX = (1 - range/2) + range * ( (Math.abs(dx)/maxSpeed) - (Math.abs(dy)/maxSpeed) );
         scaleY = (1 - range/2) + range * ( (Math.abs(dy)/maxSpeed) - (Math.abs(dx)/maxSpeed) );
 
-        Vector v = clamp2(dx,dy,maxSpeed);
-        dx = friction(v.x);
-        dy = friction(v.y);
+        updateSpeed();
 
-        Collision c = Collision.speedBox(x,y,width, height, dx, dy);
-
-
-        List<Thing> allPossibleCollisions = c.collidesWithThing(things, this);
-
-        //x direction
-        int newDX = (int) dx;
-        int oldSign = (int) Math.signum(dx);
-
-        c = Collision.speedBox(x, y, width, height, newDX, 0);
-        List<Thing> allXCollisions = c.collidesWithThing(allPossibleCollisions, this);
-
-
-        while(!allXCollisions.isEmpty() && newDX != 0) {
-            newDX -= Math.signum(dx);
-            if (Math.signum(newDX) != oldSign) {
-                newDX = 0;
-            }
-            c = Collision.speedBox(x,y,width,height, newDX, 0);
-            allXCollisions = c.collidesWithThing(allXCollisions, this);
-        }
-
-        x += newDX;
-
-        //y direction
-        int newDY = (int) dy;
-        oldSign = (int) Math.signum(dy);
-
-        c = Collision.speedBox(x, y, width, height, 0, newDY);
-        List<Thing> allYCollisions = c.collidesWithThing(allPossibleCollisions, this);
-
-        while(!allYCollisions.isEmpty() && newDY != 0) {
-            newDY -= Math.signum(dy);
-            if (Math.signum(newDY) != oldSign) {
-                newDY = 0;
-            }
-            c = Collision.speedBox(x,y,width,height, 0, newDY);
-            allYCollisions = c.collidesWithThing(allYCollisions, this);
-        }
-
-
-        y += newDY;
+        handleCollisions(things);
     }
+
+
 
     public void incrementX(boolean direction){
         if (direction) x++;
@@ -149,16 +84,7 @@ public class Player extends Thing{
 
     }
 
-    private class Vector {
 
-        public final double x;
-        public final double y;
-
-        Vector(double x, double y){
-            this.x = x;
-            this.y = y;
-        }
-    }
 
     @Override
     public double height() { return height * scaleY; }

@@ -16,18 +16,33 @@ public class Blob extends Thing{
         this.x = x;
         this.y = y;
         collision.updateSize(image.getWidth(null),image.getHeight(null));
+        this.width = image.getWidth(null);
+        this.height = image.getHeight(null);
+
+        this.acceleration = .25;
+        this.frictionAcc = .1;
+        this.maxSpeed = 12;
     }
 
     @Override
-    public void update(List<Thing> list) {
-        for (Thing t : list){
+    public void update(List<Thing> things) {
+        for (Thing t : things){
             if (t instanceof Player){
                 xGoal = t.xC();
                 yGoal = t.yC();
             }
         }
 
+
         // set dx and dy to move to player - will need cos and sin maybe?
 
+        dx += Math.signum(xGoal - xC()) * acceleration;
+        dy += Math.signum(yGoal - yC()) * acceleration;
+
+
+
+        updateSpeed();
+
+        handleCollisions(things);
     }
 }

@@ -40,6 +40,13 @@ public class Main extends JFrame {
         addThing(new Box(290,260, 30, 30));
         addThing(new Box(290,230, 30, 30));
         addThing(player);
+        addThing(new Blob(100,100));
+        addThing(new Blob(150,100));
+        addThing(new Blob(100,150));
+        addThing(new Blob(300,500));
+
+
+
 
         //creating two listener that calls our update and render functions and sending them to the controller
         this.controller = new Backend(e -> update(), this::render);
@@ -65,7 +72,8 @@ public class Main extends JFrame {
         if (controller.isPressed(Keys.RIGHT)) player.incrementDX(true);
 
         // Updates
-        player.update(things);
+        things.forEach(t -> t.update(things));
+
         cam.update();
         updateOffset(cam.x()-this.getContentPane().getWidth()/2,cam.y()-this.getContentPane().getHeight()/2); // Follow the player
     }

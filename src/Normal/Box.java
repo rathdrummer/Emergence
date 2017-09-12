@@ -9,17 +9,14 @@ import java.util.List;
  */
 public class Box extends Thing {
 
-    private Image img;
-
     public Box(int x, int y, int width, int height) {
         super(new Collision(x, y, width, height));
-        this.img = Img.loadImage("box.png");
-    }
+        this.image = Img.loadImage("box");
 
-
-    @Override
-    public Image getImage() {
-        return img;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
     }
 
     @Override
