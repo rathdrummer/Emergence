@@ -1,6 +1,6 @@
 package Normal;
 
-import java.awt.*;
+
 import java.util.List;
 
 
@@ -11,28 +11,54 @@ public class Player extends Thing{
 
     private double acceleration;
     private double maxSpeed;
-    private Image img;
-    private double frictionAcc;
+
     private double scaleX;
     private double scaleY;
 
     public Player(String name){
         super(new Collision(100, 200, 0, 0));
-        img = Img.loadImage(name);
+
+        /*add sprites to player*/
+
+        //only on image, so we split it up after we load it into one sprite
+        Sprite all = new Sprite("person", 50, 50);
+        all.setImageSpeed(.25); // this image speed will be set for those who take parts of it
+
+
+        Sprite down = all.getPartOf(0, 4);
+        Sprite right = all.getPartOf(4, 4);
+        Sprite up = all.getPartOf(8, 4);
+        Sprite left = all.getPartOf(12, 4);
+
+        addSprite(down, new AnimationType(AnimationEnum.Walk, DirectionEnum.Down));
+        addSprite(right, new AnimationType(AnimationEnum.Walk, DirectionEnum.Right));
+        addSprite(up, new AnimationType(AnimationEnum.Walk, DirectionEnum.Up));
+        addSprite(left, new AnimationType(AnimationEnum.Walk, DirectionEnum.Left));
+
+        addSprite(all, new AnimationType(AnimationEnum.Normal));
+
+        playAnimation(); //we do not want to play them from the start
+
         x = 100;
         y = 200;
         dx = 0;
         dy = 0;
         acceleration = 1;
         maxSpeed = 7;
-        frictionAcc = 0.5;
         scaleX = 1;
         scaleY = 1;
-        height = img.getHeight(null);
-        width = img.getWidth(null);
+        height = getImage().getHeight(null);
+        width = getImage().getWidth(null);
         collision.updateSize(width,height);
     }
 
+
+    public void input(boolean right, boolean up, boolean left, boolean down) {
+        if (right) incrementDX(true);
+        if (up) incrementDY(false);
+        if (left) incrementDX(false);
+        if (down) incrementDY(true);
+    }
 
 
     @Override
@@ -43,9 +69,51 @@ public class Player extends Thing{
         scaleX = (1 - range/2) + range * ( (Math.abs(dx)/maxSpeed) - (Math.abs(dy)/maxSpeed) );
         scaleY = (1 - range/2) + range * ( (Math.abs(dy)/maxSpeed) - (Math.abs(dx)/maxSpeed) );
 
+        AnimationEnum walk = AnimationEnum.Walk;
+
+        /*
+            Setting the sprite to be the largest value of speed,
+            ex) if we are moving mostly right but a little up we choose right
+        */
+
+        boolean stopAnimation = true;
+
+        if (Math.abs(dx) > Math.abs(dy)) {
+            if (Math.abs(dx) > 0.25) {
+
+                stopAnimation = false;
+
+                if (dx > 0) {
+                    changeSpriteTo(new AnimationType(walk, DirectionEnum.Right));
+                }else {
+                    changeSpriteTo(new AnimationType(walk, DirectionEnum.Left));
+                }
+            }
+        } else {
+            if (Math.abs(dy) > 0.25) {
+
+                stopAnimation = false;
+
+                if (dy > 0) {
+                    changeSpriteTo(new AnimationType(walk, DirectionEnum.Down));
+                }else {
+                    changeSpriteTo(new AnimationType(walk, DirectionEnum.Up));
+                }
+            }
+        }
+
+
+        if (stopAnimation) {
+            pauseAnimation();
+        }
+        else {
+            playAnimation();
+            getSprite().setImageSpeed( 0.25 * Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2)) / maxSpeed );
+        }
+
         updateSpeed();
 
-        handleCollisions(things);
+        handleCollisions(things, false);
     }
 
 
@@ -87,11 +155,11 @@ public class Player extends Thing{
 
 
     @Override
-    public double height() { return height * scaleY; }
+    public double height() { return height; }
 
     @Override
     public double width() {
-        return width *scaleX;
+        return width;
     }
 
     @Override
@@ -107,16 +175,14 @@ public class Player extends Thing{
 
     @Override
     public double xC() {
-        return (int)(x + (height * 0.5 * scaleX));
+        return (int)(x + (height * 0.5));
     }
 
     @Override
     public double yC() {
-        return (int)(y + (width * 0.5 * scaleY));
+        return (int)(y + (width * 0.5));
     }
 
-    @Override
-    public Image getImage() {
-        return img;
-    }
+
+
 }

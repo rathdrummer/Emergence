@@ -1,7 +1,11 @@
 package Normal;
 
+import org.junit.Assert;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.IntSummaryStatistics;
 
 
 /**
@@ -29,11 +33,20 @@ public class Sprite {
         img = Library.loadSprite(imagePath, width);
     }
 
+
     public Sprite(BufferedImage image) {
         img = new BufferedImage[1];
         img[0] = image;
         imageSpeed = 0;
     }
+
+    public Sprite(BufferedImage[] images) {
+        this.img = images;
+        if (this.img.length == 1) {
+            imageSpeed = 0;
+        }
+    }
+
 
     public boolean looped() {
         return looped;
@@ -63,7 +76,7 @@ public class Sprite {
 
     public void update() {
         boolean nowLoop = false;
-        if (imageSpeed != 0) {
+        if (imageSpeed != 0 && img.length > 1) {
             imageIndex += imageSpeed;
 
             int floored = (int) Math.floor(imageIndex);
@@ -95,4 +108,22 @@ public class Sprite {
         return img[(int) imageIndex];
     }
 
+
+    public Sprite getPartOf(int startFrame, int nrOfFrames) {
+
+        BufferedImage[] images = new BufferedImage[nrOfFrames];
+
+        for (int i = 0; i < nrOfFrames; i++) {
+            BufferedImage bim = img[i + startFrame];
+            images[i] = bim;
+        }
+
+        Sprite spr = new Sprite(images);
+        spr.setImageSpeed(imageSpeed);
+        return spr;
+    }
+
+    public double getImageSpeed() {
+        return imageSpeed;
+    }
 }

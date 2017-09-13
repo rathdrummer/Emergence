@@ -26,7 +26,11 @@ public class CameraFollower {
     }
 
 
-    public void update(){
+    private double clamp(double val, double min, double max){
+        return Math.max(min, Math.min(max, val));
+    }
+
+    public void update(int width, int height){
 
         dx = RATE*(friend.xC()-x);
         dy = RATE*(friend.yC()-y);
@@ -36,6 +40,9 @@ public class CameraFollower {
 
         if (Math.abs(friend.yC()-y) > STOP_THRESHOLD) y += dy;
         else dy = 0;
+
+        x = clamp(x, width/2, 1000);
+        y = clamp(y, height/2, 1000);
     }
 
     public double x() {
