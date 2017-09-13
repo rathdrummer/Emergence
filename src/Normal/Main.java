@@ -1,5 +1,8 @@
 package Normal;
 
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.Control;
+import javax.sound.sampled.FloatControl;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -8,10 +11,12 @@ import java.util.List;
 
 public class Main extends JFrame {
 
+    private final Clip clip;
     private Backend controller;
     private Player player;
     private CameraFollower cam;
     private List<Thing> things = new ArrayList<>();
+
 
     // Stack of all the drawable objects to be shown on screen, in order.
     public LinkedList<Drawable> objectStack = new LinkedList<>();
@@ -19,6 +24,7 @@ public class Main extends JFrame {
     // Camera offset - lets the camera follow the player or anything else
     private double xOffset = 0;
     private double yOffset = 0;
+    private boolean isPressed = false; //get rid of soon
 
     /*
     // Maybe we will need to store the size of the area so we know when to stop scrolling with the camera
@@ -51,7 +57,12 @@ public class Main extends JFrame {
         //creating two listener that calls our update and render functions and sending them to the controller
         this.controller = new Backend(e -> update(), this::render);
         initUI();
-        Sound.play("crow");
+
+        clip = Sound.playMusic("forest-flute");
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+        //Sound.playMusic("forest-strings").loop(Clip.LOOP_CONTINUOUSLY);
+
+
     }
 
     private void initUI() {
@@ -71,6 +82,23 @@ public class Main extends JFrame {
         if (controller.isPressed(Keys.DOWN)) player.incrementDY(true);
         if (controller.isPressed(Keys.LEFT)) player.incrementDX(false);
         if (controller.isPressed(Keys.RIGHT)) player.incrementDX(true);
+
+        if (controller.isPressed(Keys.SOUND)) {
+
+            if (!isPressed) {
+                isPressed = true;
+                long time = System.currentTimeMillis();
+                FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+                float range = gainControl.getMaximum() - gainControl.getMinimum();
+                float gain = (range * 0.7f) + gainControl.getMinimum();
+                gainControl.setValue(gain);
+                System.out.println(System.currentTimeMillis() - time);
+
+            }
+        }
+        else {
+            isPressed = false;
+        }
 
         // Updates
         things.forEach(t -> t.update(things));
