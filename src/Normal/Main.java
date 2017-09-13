@@ -51,6 +51,7 @@ public class Main extends JFrame {
         //creating two listener that calls our update and render functions and sending them to the controller
         this.controller = new Backend(e -> update(), this::render);
         initUI();
+        Sound.play("crow");
     }
 
     private void initUI() {
