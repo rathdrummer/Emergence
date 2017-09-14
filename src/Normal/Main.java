@@ -1,10 +1,12 @@
 package Normal;
 
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.Control;
 import javax.sound.sampled.FloatControl;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -31,7 +33,7 @@ public class Main extends JFrame {
     */
 
     public Main(){
-        player = new Player(100, 200);
+        player = new Player("circle.png");
         cam = new CameraFollower(player);
 
         for (int i = 0; i < 256; i++) {
@@ -64,24 +66,19 @@ public class Main extends JFrame {
 
 
         addThing(player);
-
         addThing(new Blob(100,100));
         addThing(new Blob(150,100));
         addThing(new Blob(100,150));
         addThing(new Blob(300,500));
 
 
-
         //creating two listener that calls our update and render functions and sending them to the controller
         this.controller = new Backend(e -> update(), this::render);
         initUI();
 
-        clip = null;
-        //Todo, this casts an error , RIFFInvalidDateException: Chunk size too big
-        //On further inspection i find that I cannot play the file even externally so it is probably a fault of the file
-        //clip = Sound.playMusic("forest-flute");
-        //clip.loop(Clip.LOOP_CONTINUOUSLY);
-        //Sound.playMusic("forest-strings").loop(Clip.LOOP_CONTINUOUSLY);
+        clip = Sound.playMusic("forest-flute");
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+        Sound.playMusic("forest-strings").loop(Clip.LOOP_CONTINUOUSLY);
     }
 
     private void initUI() {
@@ -98,11 +95,11 @@ public class Main extends JFrame {
     public void update() {
         //inputs
         player.input(controller.isPressed(Keys.RIGHT),controller.isPressed(Keys.UP),
-                controller.isPressed(Keys.LEFT),controller.isPressed(Keys.DOWN));
+                controller.isPressed(Keys.LEFT),controller.isPressed(Keys.DOWN), controller.isPressed(Keys.SHOOT));
 
-        if (controller.isPressed(Keys.SOUND)) {
+        /*if (controller.isPressed(Keys.SOUND)) {
 
-            if (!isPressed && clip != null) {
+            if (!isPressed) {
                 isPressed = true;
                 long time = System.currentTimeMillis();
                 FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
@@ -114,10 +111,25 @@ public class Main extends JFrame {
         }
         else {
             isPressed = false;
+        }*/
+
+        if (isPressed)  {
+
+        }
+        // Updates
+        List<Thing> buffer = new ArrayList<>();
+
+        for (Thing t : things) {
+            for (Thing newThing : t.tick(things)) {
+                buffer.add(newThing);
+            }
         }
 
-        // Updates
-        things.forEach(t -> t.tick(things));
+        for (Thing newThing : buffer) {
+            addThing(newThing);
+        }
+
+        things.removeIf(t -> t.toRemove());
 
         cam.update(this.getContentPane().getWidth(), this.getContentPane().getHeight());
         updateOffset(cam.x()-this.getContentPane().getWidth()/2,cam.y()-this.getContentPane().getHeight()/2); // Follow the player
@@ -130,24 +142,15 @@ public class Main extends JFrame {
     public void render(Graphics2D g2d) {
 
         // Apply camera offset while drawing
-        for (Drawable d : objectStack){
+        for (Iterator<Drawable> iterator = objectStack.iterator(); iterator.hasNext(); ) {
+            Drawable d = iterator.next();
             g2d.drawImage(d.getImage(),
-                    (int)(d.x()-xOffset),
-                    (int)(d.y()-yOffset),
-                    (int)d.width(),
-                    (int)d.height(),
-                    null) ;
-
-            /*
-            if (!(d instanceof Tile)) {
-                g2d.fillOval((int) (d.xC() - 2 - xOffset), (int) (d.yC() - 2 - yOffset), 4, 4);
-                if (d instanceof Thing) {
-                    Thing thing = (Thing) d;
-                    Collision c = thing.getCollision();
-                    g2d.drawRect(c.getX() - (int) xOffset, c.getY() - (int) yOffset, c.getWidth(), c.getHeight());
-                }
-            }
-             */
+                    (int) (d.x() - xOffset),
+                    (int) (d.y() - yOffset),
+                    (int) d.width(),
+                    (int) d.height(),
+                    null);
+            if (d.toRemove()) iterator.remove();
         }
 
     }

@@ -8,7 +8,7 @@ import java.awt.*;
 /**
  * A static image that can be drawn as a background area. Renamed from Background.
  */
-public class Area implements Drawable {
+public class Area extends Drawable {
 
     private double x;
     private double y;

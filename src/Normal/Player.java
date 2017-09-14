@@ -1,6 +1,7 @@
 package Normal;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -14,6 +15,9 @@ public class Player extends Thing{
 
     private double scaleX;
     private double scaleY;
+    private boolean shoot;
+    private Vector direction = new Vector(0,0);
+    private boolean shootIsPressed = false;
 
     public Player(double x, double y){
         super(new Collision(x, y, 0, 0));
@@ -54,16 +58,28 @@ public class Player extends Thing{
     }
 
 
-    public void input(boolean right, boolean up, boolean left, boolean down) {
+    public void input(boolean right, boolean up, boolean left, boolean down, boolean shoot) {
         if (right) incrementDX(true);
         if (up) incrementDY(false);
         if (left) incrementDX(false);
         if (down) incrementDY(true);
+
+        this.shoot = false;
+        if (shoot) {
+            if (!this.shootIsPressed){
+                this.shootIsPressed = true;
+                this.shoot = true;
+            }
+
+        }
+        else {
+            this.shootIsPressed = false;
+        }
     }
 
 
     @Override
-    public void update(List<Thing> things){
+    public List<Thing> update(List<Thing> things){
 
         double range = 0.1;
 
@@ -114,7 +130,23 @@ public class Player extends Thing{
 
         updateSpeed();
 
-        handleCollisions(things, false);
+        if (Math.abs(dx) +  Math.abs(dy) > 0) {
+            direction = new Vector(dx, dy);
+        }
+
+        handleCollisions(things, false, true);
+
+        ArrayList<Thing> newThings = new ArrayList<>();
+
+        Projectile orb = new Projectile(xC(), yC(),new Sprite("orb"), direction.getAngle(),10);
+        orb.setPosition(orb.centreOnLeftCorner());
+        orb.setOwner(this);
+
+        if (shoot){
+            newThings.add(orb);
+        }
+
+        return newThings;
     }
 
 

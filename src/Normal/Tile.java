@@ -6,7 +6,7 @@ import java.awt.*;
  * Created by oskar on 2017-09-14.
  * This classes has some inputs and outputs
  */
-public class Tile implements Drawable {
+public class Tile extends Drawable {
     Image image;
     private int x;
     private int y;

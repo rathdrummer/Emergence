@@ -27,7 +27,7 @@ public class Blob extends Thing{
     }
 
     @Override
-    public void update(List<Thing> things) {
+    public List<Thing> update(List<Thing> things) {
         for (Thing t : things){
             if (t instanceof Player){
                 xGoal = t.xC();
@@ -48,6 +48,7 @@ public class Blob extends Thing{
 
         updateSpeed();
 
-        handleCollisions(things, true);
+        handleCollisions(things, true, false);
+        return  null;
     }
 }

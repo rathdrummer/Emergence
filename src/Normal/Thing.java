@@ -1,6 +1,7 @@
 package Normal;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.awt.*;
@@ -8,7 +9,7 @@ import java.awt.*;
 /**
  * The overarching class for all things in-game.
  */
-public abstract class Thing implements Drawable{
+public abstract class Thing extends Drawable{
 
     protected double x = 0;
     protected double y = 0;
@@ -17,6 +18,7 @@ public abstract class Thing implements Drawable{
     protected double width = 400;
     protected double height = 100;
     protected double acceleration = 1;
+    protected Thing owner;
 
     protected HashMap<AnimationType, Sprite> sprites = new HashMap<>();
     protected AnimationType currentSprite = null;
@@ -37,6 +39,22 @@ public abstract class Thing implements Drawable{
     protected double maxSpeed=7;
     private boolean animate = true;
 
+    public Thing(Sprite sprite, Vector vector){
+        this(sprite, vector.x, vector.y);
+    }
+
+    public Thing(Sprite sprite, double x, double y){
+        width = sprite.getWidth();
+        height = sprite.getHeight();
+        this.x = x;
+        this.y = y;
+        collision = new Collision(x,y,width,height);
+        setSprite(sprite, new AnimationType(AnimationEnum.Normal));
+    }
+
+    public Vector centreOnLeftCorner(){
+        return new Vector(x-width/2, y-height/2);
+    }
 
     public Thing(Collision c){ this.collision = c;}
 
@@ -174,15 +192,10 @@ public abstract class Thing implements Drawable{
         if (animationType.equals(currentSprite)) {
             return true;
         }
-        getSprite().setImageIndex(0); // restarts the old sprite
         return changeSpriteTo(animationType, 0);
     }
 
     private boolean changeSpriteTo(AnimationType animationType, int index) {
-        if (!animationType.equals(currentSprite)) {
-            getSprite().setImageIndex(0); // resets the old sprite
-        }
-
         Sprite spr = sprites.get(animationType);
         if (spr != null) {
             currentSprite = animationType;
@@ -194,12 +207,22 @@ public abstract class Thing implements Drawable{
         }
     }
 
+    public void setSpeeds(Vector v) {
+        this.dx = v.x;
+        this.dy = v.y;
+    }
+
+    public void setPosition(Vector v) {
+        this.x = v.x;
+        this.y = v.y;
+
+    }
     /*
         Wrapper for the update so we do not have to write duplicate code,
         Here we put code that all "Things" should run, like update their sprite and such.
     */
-    public final void tick(List<Thing> things) {
-        update(things);
+    public final List<Thing> tick(List<Thing> things) {
+        List<Thing> newThings = update(things);
 
         if (animate) {
             Sprite sprite = getSprite();
@@ -209,6 +232,14 @@ public abstract class Thing implements Drawable{
             }
 
         }
+
+        if (newThings == null) {
+            newThings = new ArrayList<>();
+        }
+
+        if (alive && hp <= 0) this.alive = false;
+
+        return newThings;
     }
 
     public void addSprite(String fileName, AnimationType at) {
@@ -240,7 +271,7 @@ public abstract class Thing implements Drawable{
         }
     }
 
-    public abstract void update(List<Thing> list);
+    public abstract List<Thing> update(List<Thing> list);
 
     public double clamp(double val, double range){
         return Math.max(-range, Math.min(range, val));
@@ -260,16 +291,6 @@ public abstract class Thing implements Drawable{
         return sprites.get(currentSprite);
     }
 
-    protected class Vector {
-
-        public final double x;
-        public final double y;
-
-        Vector(double x, double y){
-            this.x = x;
-            this.y = y;
-        }
-    }
 
     protected void updateSpeed(){
         Vector v = clamp2(dx,dy,maxSpeed);
@@ -287,18 +308,21 @@ public abstract class Thing implements Drawable{
         return val;
     }
 
-    protected void handleCollisions(List<Thing> things, boolean stopWhenHitWall) {
-        Collision c = Collision.speedBox(xC(),yC(),width, height, dx, dy);
+    protected void handleCollisions(List<Thing> things, boolean stopWhenHitWall, boolean applyKnockBack) {
+        Collision c = Collision.speedBox(x,y,width, height, dx, dy);
 
 
         List<Thing> allPossibleCollisions = c.collidesWithThing(things, this);
 
-        //x direction
+        allPossibleCollisions.removeIf(thing -> this.owner == thing || this == thing.owner);
+
+            //x direction
         int newDX = (int) dx;
         int oldSign = (int) Math.signum(dx);
 
-        c = Collision.speedBox(xC(), yC(), width, height, newDX, 0);
+        c = Collision.speedBox(x, y, width, height, newDX, 0);
         List<Thing> allXCollisions = c.collidesWithThing(allPossibleCollisions, this);
+        allXCollisions.forEach(t -> t.harm(0, new Vector(dx, 0)));
         if (stopWhenHitWall && !allXCollisions.isEmpty()) {
             dx = 0;
             newDX = 0;
@@ -310,7 +334,7 @@ public abstract class Thing implements Drawable{
             if (Math.signum(newDX) != oldSign) {
                 newDX = 0;
             }
-            c = Collision.speedBox(xC(),yC(),width,height, newDX, 0);
+            c = Collision.speedBox(x,y,width,height, newDX, 0);
             allXCollisions = c.collidesWithThing(allXCollisions, this);
         }
 
@@ -320,8 +344,9 @@ public abstract class Thing implements Drawable{
         int newDY = (int) dy;
         oldSign = (int) Math.signum(dy);
 
-        c = Collision.speedBox(xC(), yC(), width, height, 0, newDY);
+        c = Collision.speedBox(x, y, width, height, 0, newDY);
         List<Thing> allYCollisions = c.collidesWithThing(allPossibleCollisions, this);
+        allXCollisions.forEach(t -> t.harm(0, new Vector(0, dy)));
 
         if (stopWhenHitWall && !allYCollisions.isEmpty()) {
             dy = 0;
@@ -333,14 +358,24 @@ public abstract class Thing implements Drawable{
             if (Math.signum(newDY) != oldSign) {
                 newDY = 0;
             }
-            c = Collision.speedBox(xC(),yC(),width,height, 0, newDY);
+            c = Collision.speedBox(x,y,width,height, 0, newDY);
             allYCollisions = c.collidesWithThing(allYCollisions, this);
         }
 
 
         y += newDY;
 
-        collision.updatePosition(xC(),yC());
+        collision.updatePosition(x,y);
+    }
+
+    public void setOwner(Thing owner) {
+        this.owner = owner;
+    }
+
+    public void harm(int damage, Vector knockback){
+        this.hp-=damage;
+        dx+=knockback.x;
+        dy+=knockback.y;
     }
 
 }
