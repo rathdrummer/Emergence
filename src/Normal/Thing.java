@@ -1,5 +1,7 @@
 package Normal;
 
+import java.awt.image.BufferedImage;
+import java.util.HashMap;
 import java.util.List;
 import java.awt.*;
 
@@ -16,8 +18,9 @@ public abstract class Thing implements Drawable{
     protected double height = 100;
     protected double acceleration = 1;
 
-    protected Image image;
-    protected Collision collision;
+    protected HashMap<AnimationType, Sprite> sprites = new HashMap<>();
+    protected AnimationType currentSprite = null;
+    protected Collision collision = null;
 
     protected double weight = 10;
 
@@ -32,7 +35,7 @@ public abstract class Thing implements Drawable{
     protected double flammability = 1;
     protected double frictionAcc=0.5;
     protected double maxSpeed=7;
-
+    private boolean animate = true;
 
 
     public Thing(Collision c){ this.collision = c;}
@@ -40,8 +43,6 @@ public abstract class Thing implements Drawable{
     public Collision getCollision() {
         return collision;
     }
-
-
 
     public double x() {
         return x;
@@ -144,10 +145,95 @@ public abstract class Thing implements Drawable{
     public void setHP(double hp){this.hp = hp;}
 
     public Image getImage(){
-        return image;
+        return getSprite().getImage();
     }
 
-    public void setImage(Image image){this.image = image;}
+    public void setSprite(Sprite sprite, AnimationType ae){
+        addSprite(sprite, ae);
+        currentSprite = ae;
+    }
+
+    public void setSprite(String fileName, AnimationType ae){
+        Sprite sprite = new Sprite(fileName);
+        addSprite(sprite, ae);
+        currentSprite = ae;
+    }
+
+    public void setSprite(BufferedImage image, AnimationType ae){
+        Sprite sprite = new Sprite(image);
+        addSprite(sprite, ae);
+        currentSprite = ae;
+    }
+
+    /**
+     * Use this to switch between animations
+     * @param animationType
+     * @return
+     */
+    public boolean changeSpriteTo(AnimationType animationType) {
+        if (animationType.equals(currentSprite)) {
+            return true;
+        }
+        return changeSpriteTo(animationType, 0);
+    }
+
+    private boolean changeSpriteTo(AnimationType animationType, int index) {
+        Sprite spr = sprites.get(animationType);
+        if (spr != null) {
+            currentSprite = animationType;
+            spr.setImageIndex(index);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    /*
+        Wrapper for the update so we do not have to write duplicate code,
+        Here we put code that all "Things" should run, like update their sprite and such.
+    */
+    public final void tick(List<Thing> things) {
+        update(things);
+
+        if (animate) {
+            Sprite sprite = getSprite();
+            sprite.update();
+            if (this instanceof Player) {
+                System.out.println(sprite.getImageIndex());
+            }
+
+        }
+    }
+
+    public void addSprite(String fileName, AnimationType at) {
+
+        Sprite sprite = new Sprite(Library.loadImage(fileName));
+
+        sprites.put(at, sprite);
+        // if it is the first one added, set as current sprite
+        if (sprites.size() == 1 && currentSprite == null) {
+            currentSprite = at;
+        }
+    }
+
+    protected void pauseAnimation() {
+        animate = false;
+    }
+
+    protected void playAnimation() {
+        animate = true;
+    }
+
+
+
+    public void addSprite(Sprite sprite, AnimationType at) {
+        sprites.put(at, sprite);
+        // if it is the first one added, set as current sprite
+        if (sprites.size() == 1 && currentSprite == null) {
+            currentSprite = at;
+        }
+    }
 
     public abstract void update(List<Thing> list);
 
@@ -163,6 +249,10 @@ public abstract class Thing implements Drawable{
             y /= ratio;
         }
         return new Vector(x,y);
+    }
+
+    public Sprite getSprite() {
+        return sprites.get(currentSprite);
     }
 
     protected class Vector {
@@ -192,7 +282,7 @@ public abstract class Thing implements Drawable{
         return val;
     }
 
-    protected void handleCollisions(List<Thing> things) {
+    protected void handleCollisions(List<Thing> things, boolean stopWhenHitWall) {
         Collision c = Collision.speedBox(x,y,width, height, dx, dy);
 
 
@@ -204,6 +294,10 @@ public abstract class Thing implements Drawable{
 
         c = Collision.speedBox(x, y, width, height, newDX, 0);
         List<Thing> allXCollisions = c.collidesWithThing(allPossibleCollisions, this);
+        if (stopWhenHitWall && !allXCollisions.isEmpty()) {
+            dx = 0;
+            newDX = 0;
+        }
 
 
         while(!allXCollisions.isEmpty() && newDX != 0) {
@@ -223,6 +317,11 @@ public abstract class Thing implements Drawable{
 
         c = Collision.speedBox(x, y, width, height, 0, newDY);
         List<Thing> allYCollisions = c.collidesWithThing(allPossibleCollisions, this);
+
+        if (stopWhenHitWall && !allYCollisions.isEmpty()) {
+            dy = 0;
+            newDY = 0;
+        }
 
         while(!allYCollisions.isEmpty() && newDY != 0) {
             newDY -= Math.signum(dy);

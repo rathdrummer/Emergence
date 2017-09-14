@@ -1,6 +1,7 @@
 package Normal;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 /**
@@ -9,14 +10,17 @@ import java.util.List;
  */
 public class Box extends Thing {
 
-    public Box(int x, int y, int width, int height) {
-        super(new Collision(x, y, width, height));
-        this.image = Img.loadImage("box");
+    public Box(int x, int y) {
+        super(new Collision(x, y, 0, 0));
+        BufferedImage img = Library.loadTile("static", 0, 0, 50, 50);
+        setSprite(img, new AnimationType(AnimationEnum.Normal));
 
         this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+        this.y = y - 20;
+        this.width = img.getWidth();
+        this.height = img.getHeight();
+        collision.updateSize(width, height);
+        collision.updatePosition(this.x, this.y);
     }
 
     @Override

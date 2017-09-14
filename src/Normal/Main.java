@@ -33,25 +33,42 @@ public class Main extends JFrame {
 
     public Main(){
         player = new Player("circle.png");
-
         cam = new CameraFollower(player);
 
+        for (int i = 0; i < 256; i++) {
+            int column = i % 16;
+            int row = i / 16;
 
-        addThing(new Area("car-road-rug.jpg"));
-        addThing(new Box(200,200, 30, 30));
-        addThing(new Box(200,230, 30, 30));
-        addThing(new Box(200,260, 30, 30));
-        addThing(new Box(230,260, 30, 30));
-        addThing(new Box(260,260, 30, 30));
-        addThing(new Box(290,260, 30, 30));
-        addThing(new Box(290,230, 30, 30));
+            addThing(new Tile("tiles", 50 * column, 50 * row, 50, 50, 2));
+            if (Math.random() < 0.15) {
+                addThing(new Tile("tiles", 50 * column, 50 * row, 50, 50, 4 + (int) Math.round(3 * Math.random())));
+            }
+        }
+
+        Stepper stepper = new Stepper(200, 200, 50);
+        addThing(new Box(stepper.getX(), stepper.getY()));
+        addThing(new Box(stepper.getX(), stepper.down()));
+        addThing(new Box(stepper.getX(), stepper.down()));
+        addThing(new Box(stepper.getX(), stepper.down()));
+        addThing(new Box(stepper.right(), stepper.getY()));
+        addThing(new Box(stepper.right(), stepper.getY()));
+        addThing(new Box(stepper.right(), stepper.getY()));
+        addThing(new Box(stepper.right(), stepper.getY()));
+        addThing(new Box(stepper.getX(), stepper.up()));
+        addThing(new Box(stepper.getX(), stepper.up()));
+        addThing(new Box(stepper.getX(), stepper.up()));
+        addThing(new Box(stepper.getX(), stepper.up()));
+        addThing(new Box(stepper.right(), stepper.getY()));
+        addThing(new Box(stepper.right(), stepper.getY()));
+        addThing(new Box(stepper.right(), stepper.getY()));
+        addThing(new Box(stepper.right(), stepper.getY()));
+
+
         addThing(player);
         addThing(new Blob(100,100));
         addThing(new Blob(150,100));
         addThing(new Blob(100,150));
         addThing(new Blob(300,500));
-
-
 
 
         //creating two listener that calls our update and render functions and sending them to the controller
@@ -61,8 +78,6 @@ public class Main extends JFrame {
         clip = Sound.playMusic("forest-flute");
         clip.loop(Clip.LOOP_CONTINUOUSLY);
         //Sound.playMusic("forest-strings").loop(Clip.LOOP_CONTINUOUSLY);
-
-
     }
 
     private void initUI() {
@@ -78,10 +93,8 @@ public class Main extends JFrame {
 
     public void update() {
         //inputs
-        if (controller.isPressed(Keys.UP)) player.incrementDY(false);
-        if (controller.isPressed(Keys.DOWN)) player.incrementDY(true);
-        if (controller.isPressed(Keys.LEFT)) player.incrementDX(false);
-        if (controller.isPressed(Keys.RIGHT)) player.incrementDX(true);
+        player.input(controller.isPressed(Keys.RIGHT),controller.isPressed(Keys.UP),
+                controller.isPressed(Keys.LEFT),controller.isPressed(Keys.DOWN));
 
         if (controller.isPressed(Keys.SOUND)) {
 
@@ -92,7 +105,6 @@ public class Main extends JFrame {
                 float range = gainControl.getMaximum() - gainControl.getMinimum();
                 float gain = (range * 0.7f) + gainControl.getMinimum();
                 gainControl.setValue(gain);
-                System.out.println(System.currentTimeMillis() - time);
 
             }
         }
@@ -101,9 +113,9 @@ public class Main extends JFrame {
         }
 
         // Updates
-        things.forEach(t -> t.update(things));
+        things.forEach(t -> t.tick(things));
 
-        cam.update();
+        cam.update(this.getContentPane().getWidth(), this.getContentPane().getHeight());
         updateOffset(cam.x()-this.getContentPane().getWidth()/2,cam.y()-this.getContentPane().getHeight()/2); // Follow the player
     }
 

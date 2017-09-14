@@ -11,17 +11,17 @@ public class Blob extends Thing{
     private double yGoal;
 
     public Blob(double x, double y) {
-        super(new Collision(x, y, 0,0));
-        this.setImage(Img.loadImage("blob"));
+        super(new Collision(x, y, 50,50));
+        setSprite(new Sprite("blobAnimation", 50), new AnimationType(AnimationEnum.Normal));
         this.x = x;
         this.y = y;
-        collision.updateSize(image.getWidth(null),image.getHeight(null));
-        this.width = image.getWidth(null);
-        this.height = image.getHeight(null);
+        collision.updateSize(getImage().getWidth(null),getImage().getHeight(null));
+        this.width = getImage().getWidth(null);
+        this.height = getImage().getHeight(null);
 
-        this.acceleration = .25;
-        this.frictionAcc = .1;
-        this.maxSpeed = 12;
+        this.acceleration = .1;
+        this.frictionAcc = 0.02;
+        this.maxSpeed = 6;
     }
 
     @Override
@@ -34,15 +34,18 @@ public class Blob extends Thing{
         }
 
 
+        double dxDirection = Math.signum(xGoal - xC());
+        double dyDirection = Math.signum(yGoal - yC());
+
+
         // set dx and dy to move to player - will need cos and sin maybe?
 
-        dx += Math.signum(xGoal - xC()) * acceleration;
-        dy += Math.signum(yGoal - yC()) * acceleration;
-
+        dx += dxDirection * acceleration;
+        dy += dyDirection * acceleration;
 
 
         updateSpeed();
 
-        handleCollisions(things);
+        handleCollisions(things, true);
     }
 }
