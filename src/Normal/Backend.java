@@ -110,7 +110,7 @@ public class Backend extends JPanel implements ActionListener, MouseListener {
         addKey(37,Keys.LEFT);
         addKey(40,Keys.DOWN);
         addKey(39,Keys.RIGHT);
-        addKey(32,Keys.SOUND);
+        addKey(32,Keys.SHOOT);
     }
 
     /**

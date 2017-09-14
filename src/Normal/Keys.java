@@ -5,5 +5,5 @@ package Normal;
  * This classes has some inputs and outputs
  */
 public enum Keys {
-    UP, DOWN, LEFT, RIGHT, SOUND;
+    UP, DOWN, LEFT, RIGHT, SOUND, SHOOT;
 }

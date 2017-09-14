@@ -1,6 +1,7 @@
 package Normal;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -14,6 +15,8 @@ public class Player extends Thing{
 
     private double scaleX;
     private double scaleY;
+    private boolean shoot;
+    private Vector direction = new Vector(0,0);
 
     public Player(String name){
         super(new Collision(100, 200, 0, 0));
@@ -53,16 +56,24 @@ public class Player extends Thing{
     }
 
 
-    public void input(boolean right, boolean up, boolean left, boolean down) {
+    public void input(boolean right, boolean up, boolean left, boolean down, boolean shoot) {
         if (right) incrementDX(true);
         if (up) incrementDY(false);
         if (left) incrementDX(false);
         if (down) incrementDY(true);
+        if (shoot) {
+            if (!this.shoot) {
+                this.shoot = true;
+            }
+        }
+        else {
+            this.shoot = false;
+        }
     }
 
 
     @Override
-    public void update(List<Thing> things){
+    public List<Thing> update(List<Thing> things){
 
         double range = 0.1;
 
@@ -113,7 +124,19 @@ public class Player extends Thing{
 
         updateSpeed();
 
+        if (Math.abs(dx) +  Math.abs(dy) > 0) {
+            direction = new Vector(dx, dy);
+        }
+
         handleCollisions(things, false);
+
+        ArrayList<Thing> newThings = new ArrayList<>();
+
+        if (shoot){
+            newThings.add(new Projectile(xC(), yC(),new Sprite("orb"), direction));
+        }
+
+        return newThings;
     }
 
 

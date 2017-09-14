@@ -77,7 +77,7 @@ public class Main extends JFrame {
 
         clip = Sound.playMusic("forest-flute");
         clip.loop(Clip.LOOP_CONTINUOUSLY);
-        //Sound.playMusic("forest-strings").loop(Clip.LOOP_CONTINUOUSLY);
+        Sound.playMusic("forest-strings").loop(Clip.LOOP_CONTINUOUSLY);
     }
 
     private void initUI() {
@@ -94,9 +94,9 @@ public class Main extends JFrame {
     public void update() {
         //inputs
         player.input(controller.isPressed(Keys.RIGHT),controller.isPressed(Keys.UP),
-                controller.isPressed(Keys.LEFT),controller.isPressed(Keys.DOWN));
+                controller.isPressed(Keys.LEFT),controller.isPressed(Keys.DOWN), controller.isPressed(Keys.SHOOT));
 
-        if (controller.isPressed(Keys.SOUND)) {
+        /*if (controller.isPressed(Keys.SOUND)) {
 
             if (!isPressed) {
                 isPressed = true;
@@ -110,10 +110,20 @@ public class Main extends JFrame {
         }
         else {
             isPressed = false;
-        }
+        }*/
 
         // Updates
-        things.forEach(t -> t.tick(things));
+        List<Thing> buffer = new ArrayList<>();
+
+        for (Thing t : things) {
+            for (Thing newThing : t.tick(things)) {
+                buffer.add(newThing);
+            }
+        }
+
+        for (Thing newThing : buffer) {
+            addThing(newThing);
+        }
 
         cam.update(this.getContentPane().getWidth(), this.getContentPane().getHeight());
         updateOffset(cam.x()-this.getContentPane().getWidth()/2,cam.y()-this.getContentPane().getHeight()/2); // Follow the player

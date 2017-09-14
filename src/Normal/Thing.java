@@ -1,6 +1,7 @@
 package Normal;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.awt.*;
@@ -37,6 +38,18 @@ public abstract class Thing implements Drawable{
     protected double maxSpeed=7;
     private boolean animate = true;
 
+    public Thing(Sprite sprite, Vector vector){
+        this(sprite, vector.x, vector.y);
+    }
+
+    public Thing(Sprite sprite, double x, double y){
+        width = sprite.getWidth();
+        height = sprite.getHeight();
+        this.x = x;
+        this.y = y;
+        collision = new Collision(x,y,width,height);
+        setSprite(sprite, new AnimationType(AnimationEnum.Normal));
+    }
 
     public Thing(Collision c){ this.collision = c;}
 
@@ -189,12 +202,22 @@ public abstract class Thing implements Drawable{
         }
     }
 
+    public void setSpeeds(Vector v) {
+        this.dx = v.x;
+        this.dy = v.y;
+    }
+
+    public void setPosition(Vector v) {
+        this.x = v.x;
+        this.y = v.y;
+
+    }
     /*
         Wrapper for the update so we do not have to write duplicate code,
         Here we put code that all "Things" should run, like update their sprite and such.
     */
-    public final void tick(List<Thing> things) {
-        update(things);
+    public final List<Thing> tick(List<Thing> things) {
+        List<Thing> newThings = update(things);
 
         if (animate) {
             Sprite sprite = getSprite();
@@ -204,6 +227,12 @@ public abstract class Thing implements Drawable{
             }
 
         }
+
+        if (newThings == null) {
+            newThings = new ArrayList<>();
+        }
+
+        return newThings;
     }
 
     public void addSprite(String fileName, AnimationType at) {
@@ -235,7 +264,7 @@ public abstract class Thing implements Drawable{
         }
     }
 
-    public abstract void update(List<Thing> list);
+    public abstract List<Thing> update(List<Thing> list);
 
     public double clamp(double val, double range){
         return Math.max(-range, Math.min(range, val));
@@ -255,16 +284,6 @@ public abstract class Thing implements Drawable{
         return sprites.get(currentSprite);
     }
 
-    protected class Vector {
-
-        public final double x;
-        public final double y;
-
-        Vector(double x, double y){
-            this.x = x;
-            this.y = y;
-        }
-    }
 
     protected void updateSpeed(){
         Vector v = clamp2(dx,dy,maxSpeed);

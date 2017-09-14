@@ -1,7 +1,7 @@
 package Normal;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,7 +24,7 @@ public class Box extends Thing {
     }
 
     @Override
-    public void update(List<Thing> list) {
-
+    public List<Thing> update(List<Thing> list) {
+        return null;
     }
 }
