@@ -309,7 +309,7 @@ public abstract class Thing extends Drawable{
     }
 
     protected void handleCollisions(List<Thing> things, boolean stopWhenHitWall, boolean applyKnockBack) {
-        Collision c = Collision.speedBox(x,y,width, height, dx, dy);
+        Collision c = Collision.speedBox(xC(),yC(),width, height, dx, dy);
 
 
         List<Thing> allPossibleCollisions = c.collidesWithThing(things, this);
@@ -320,9 +320,9 @@ public abstract class Thing extends Drawable{
         int newDX = (int) dx;
         int oldSign = (int) Math.signum(dx);
 
-        c = Collision.speedBox(x, y, width, height, newDX, 0);
+        c = Collision.speedBox(xC(), yC(), width, height, newDX, 0);
         List<Thing> allXCollisions = c.collidesWithThing(allPossibleCollisions, this);
-        allXCollisions.forEach(t -> t.harm(0, new Vector(dx, 0)));
+        if (applyKnockBack) allXCollisions.forEach(t -> t.harm(0, new Vector(dx, 0)));
         if (stopWhenHitWall && !allXCollisions.isEmpty()) {
             dx = 0;
             newDX = 0;
@@ -334,7 +334,7 @@ public abstract class Thing extends Drawable{
             if (Math.signum(newDX) != oldSign) {
                 newDX = 0;
             }
-            c = Collision.speedBox(x,y,width,height, newDX, 0);
+            c = Collision.speedBox(xC(),yC(),width,height, newDX, 0);
             allXCollisions = c.collidesWithThing(allXCollisions, this);
         }
 
@@ -344,9 +344,9 @@ public abstract class Thing extends Drawable{
         int newDY = (int) dy;
         oldSign = (int) Math.signum(dy);
 
-        c = Collision.speedBox(x, y, width, height, 0, newDY);
+        c = Collision.speedBox(xC(), yC(), width, height, 0, newDY);
         List<Thing> allYCollisions = c.collidesWithThing(allPossibleCollisions, this);
-        allXCollisions.forEach(t -> t.harm(0, new Vector(0, dy)));
+        if (applyKnockBack) allYCollisions.forEach(t -> t.harm(0, new Vector(0, dy)));
 
         if (stopWhenHitWall && !allYCollisions.isEmpty()) {
             dy = 0;
@@ -358,14 +358,14 @@ public abstract class Thing extends Drawable{
             if (Math.signum(newDY) != oldSign) {
                 newDY = 0;
             }
-            c = Collision.speedBox(x,y,width,height, 0, newDY);
+            c = Collision.speedBox(xC(),yC(),width,height, 0, newDY);
             allYCollisions = c.collidesWithThing(allYCollisions, this);
         }
 
 
         y += newDY;
 
-        collision.updatePosition(x,y);
+        collision.updatePosition(xC(),yC());
     }
 
     public void setOwner(Thing owner) {

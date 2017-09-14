@@ -53,7 +53,7 @@ public class Player extends Thing{
         scaleY = 1;
         height = getImage().getHeight(null);
         width = getImage().getWidth(null);
-        collision.updateSize(width,height, false);
+        collision.updateSize(width,height, true);
         collision.updatePosition(xC(), yC());
     }
 

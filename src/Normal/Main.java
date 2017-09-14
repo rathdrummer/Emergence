@@ -33,7 +33,7 @@ public class Main extends JFrame {
     */
 
     public Main(){
-        player = new Player("circle.png");
+        player = new Player(100, 200);
         cam = new CameraFollower(player);
 
         for (int i = 0; i < 256; i++) {
@@ -76,9 +76,12 @@ public class Main extends JFrame {
         this.controller = new Backend(e -> update(), this::render);
         initUI();
 
+        clip = null;
+        /**
         clip = Sound.playMusic("forest-flute");
         clip.loop(Clip.LOOP_CONTINUOUSLY);
         Sound.playMusic("forest-strings").loop(Clip.LOOP_CONTINUOUSLY);
+         */
     }
 
     private void initUI() {
@@ -151,6 +154,14 @@ public class Main extends JFrame {
                     (int) d.height(),
                     null);
             if (d.toRemove()) iterator.remove();
+
+            /*//Debug code
+            if (d instanceof Thing) {
+                Collision c = ((Thing) d).getCollision();
+                g2d.drawRect(c.getX() - (int) xOffset, c.getY() - (int) yOffset , c.getWidth(), c.getHeight());
+            }
+            */
+
         }
 
     }

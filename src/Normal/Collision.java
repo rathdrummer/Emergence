@@ -45,10 +45,6 @@ public class Collision {
         this((int) xCenter, (int) yCenter, (int) width, (int) height);
     }
 
-    public void updatePosition(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
 
     public boolean collides(Collision other) {
 
