@@ -27,6 +27,16 @@ public class Projectile extends Thing{
     public List<Thing> update(List<Thing> list) {
         x +=dx;
         y +=dy;
+
+        for (Thing other : list){
+            if (this.collision.collides(other) && other != this.owner && (this.getClass() != other.getClass())){
+                other.harm(3, new Vector(dx, dy));
+                this.remove();
+            }
+        }
+
+        getCollision().updatePosition(x,y);
+
         return new ArrayList<>();
     }
 }

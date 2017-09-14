@@ -17,6 +17,7 @@ public class Player extends Thing{
     private double scaleY;
     private boolean shoot;
     private Vector direction = new Vector(0,0);
+    private boolean shootIsPressed = false;
 
     public Player(String name){
         super(new Collision(100, 200, 0, 0));
@@ -61,13 +62,17 @@ public class Player extends Thing{
         if (up) incrementDY(false);
         if (left) incrementDX(false);
         if (down) incrementDY(true);
+
+        this.shoot = false;
         if (shoot) {
-            if (!this.shoot) {
+            if (!this.shootIsPressed){
+                this.shootIsPressed = true;
                 this.shoot = true;
             }
+
         }
         else {
-            this.shoot = false;
+            this.shootIsPressed = false;
         }
     }
 
@@ -128,12 +133,16 @@ public class Player extends Thing{
             direction = new Vector(dx, dy);
         }
 
-        handleCollisions(things, false);
+        handleCollisions(things, false, true);
 
         ArrayList<Thing> newThings = new ArrayList<>();
 
+        Projectile orb = new Projectile(xC(), yC(),new Sprite("orb"), direction.getAngle(),10);
+        orb.setPosition(orb.centreOnLeftCorner());
+        orb.setOwner(this);
+
         if (shoot){
-            newThings.add(new Projectile(xC(), yC(),new Sprite("orb"), direction));
+            newThings.add(orb);
         }
 
         return newThings;

@@ -6,6 +6,7 @@ import javax.sound.sampled.FloatControl;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -112,6 +113,9 @@ public class Main extends JFrame {
             isPressed = false;
         }*/
 
+        if (isPressed)  {
+
+        }
         // Updates
         List<Thing> buffer = new ArrayList<>();
 
@@ -125,6 +129,8 @@ public class Main extends JFrame {
             addThing(newThing);
         }
 
+        things.removeIf(t -> t.toRemove());
+
         cam.update(this.getContentPane().getWidth(), this.getContentPane().getHeight());
         updateOffset(cam.x()-this.getContentPane().getWidth()/2,cam.y()-this.getContentPane().getHeight()/2); // Follow the player
     }
@@ -136,13 +142,15 @@ public class Main extends JFrame {
     public void render(Graphics2D g2d) {
 
         // Apply camera offset while drawing
-        for (Drawable d : objectStack){
+        for (Iterator<Drawable> iterator = objectStack.iterator(); iterator.hasNext(); ) {
+            Drawable d = iterator.next();
             g2d.drawImage(d.getImage(),
-                    (int)(d.x()-xOffset),
-                    (int)(d.y()-yOffset),
-                    (int)d.width(),
-                    (int)d.height(),
-                    null) ;
+                    (int) (d.x() - xOffset),
+                    (int) (d.y() - yOffset),
+                    (int) d.width(),
+                    (int) d.height(),
+                    null);
+            if (d.toRemove()) iterator.remove();
         }
 
     }

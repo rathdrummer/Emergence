@@ -9,7 +9,7 @@ import java.awt.*;
 /**
  * The overarching class for all things in-game.
  */
-public abstract class Thing implements Drawable{
+public abstract class Thing extends Drawable{
 
     protected double x = 0;
     protected double y = 0;
@@ -18,6 +18,7 @@ public abstract class Thing implements Drawable{
     protected double width = 400;
     protected double height = 100;
     protected double acceleration = 1;
+    protected Thing owner;
 
     protected HashMap<AnimationType, Sprite> sprites = new HashMap<>();
     protected AnimationType currentSprite = null;
@@ -49,6 +50,10 @@ public abstract class Thing implements Drawable{
         this.y = y;
         collision = new Collision(x,y,width,height);
         setSprite(sprite, new AnimationType(AnimationEnum.Normal));
+    }
+
+    public Vector centreOnLeftCorner(){
+        return new Vector(x-width/2, y-height/2);
     }
 
     public Thing(Collision c){ this.collision = c;}
@@ -232,6 +237,8 @@ public abstract class Thing implements Drawable{
             newThings = new ArrayList<>();
         }
 
+        if (alive && hp <= 0) this.alive = false;
+
         return newThings;
     }
 
@@ -301,18 +308,21 @@ public abstract class Thing implements Drawable{
         return val;
     }
 
-    protected void handleCollisions(List<Thing> things, boolean stopWhenHitWall) {
+    protected void handleCollisions(List<Thing> things, boolean stopWhenHitWall, boolean applyKnockBack) {
         Collision c = Collision.speedBox(x,y,width, height, dx, dy);
 
 
         List<Thing> allPossibleCollisions = c.collidesWithThing(things, this);
 
-        //x direction
+        allPossibleCollisions.removeIf(thing -> this.owner == thing || this == thing.owner);
+
+            //x direction
         int newDX = (int) dx;
         int oldSign = (int) Math.signum(dx);
 
         c = Collision.speedBox(x, y, width, height, newDX, 0);
         List<Thing> allXCollisions = c.collidesWithThing(allPossibleCollisions, this);
+        allXCollisions.forEach(t -> t.harm(0, new Vector(dx, 0)));
         if (stopWhenHitWall && !allXCollisions.isEmpty()) {
             dx = 0;
             newDX = 0;
@@ -336,6 +346,7 @@ public abstract class Thing implements Drawable{
 
         c = Collision.speedBox(x, y, width, height, 0, newDY);
         List<Thing> allYCollisions = c.collidesWithThing(allPossibleCollisions, this);
+        allXCollisions.forEach(t -> t.harm(0, new Vector(0, dy)));
 
         if (stopWhenHitWall && !allYCollisions.isEmpty()) {
             dy = 0;
@@ -355,6 +366,16 @@ public abstract class Thing implements Drawable{
         y += newDY;
 
         collision.updatePosition(x,y);
+    }
+
+    public void setOwner(Thing owner) {
+        this.owner = owner;
+    }
+
+    public void harm(int damage, Vector knockback){
+        this.hp-=damage;
+        dx+=knockback.x;
+        dy+=knockback.y;
     }
 
 }

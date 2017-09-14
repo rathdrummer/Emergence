@@ -2,30 +2,36 @@ package Normal;
 
 import java.awt.*;
 
-public interface Drawable {
+public abstract class Drawable {
 
-    // What if a common update() method was put in every drawable....
 
-    double x();
-    double y();
+
+    boolean remove; // false by default!
+
+
+    public abstract double x();
+    public abstract double y();
+
+    public boolean toRemove() {return remove;}
 
     /**
      * Get X in center of object
      */
-    default double xC(){
+    public double xC(){
         return x()+width()/2;
     };
 
     /**
      * Get Y in center of object
      */
-    default double yC(){
+    public double yC(){
         return y()+height()/2;
     };
 
-    double width();
-    double height();
+    public abstract double width();
+    public abstract double height();
 
-    Image getImage();
+    public abstract Image getImage();
 
+    public void remove(){this.remove = true;}
 }

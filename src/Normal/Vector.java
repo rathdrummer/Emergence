@@ -16,8 +16,12 @@ public class Vector {
         return new Vector(magnitude * Math.cos(radians), magnitude * Math.sin(radians));
     }
 
-    public static double getAngle{
-        return 
+    public double getAngle(){
+        return Math.atan2(y,x);
+    }
+
+    public Vector add(Vector other){
+        return new Vector(x+other.x, y+other.y);
     }
 
 

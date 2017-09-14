@@ -46,7 +46,7 @@ public class Blob extends Thing{
 
         updateSpeed();
 
-        handleCollisions(things, true);
+        handleCollisions(things, true, false);
         return  null;
     }
 }

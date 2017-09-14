@@ -51,6 +51,7 @@ public class Collision {
     public boolean collides (Thing thing) {
 
         return this.collides(thing.getCollision());
+
     }
 
     public boolean collides(List<Collision> collisions) {
