@@ -5,6 +5,10 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Particles - a lasting (or not) Drawable with minor animations (velocity and size change).
+ * Right now it creates a cloud of ya boi. Maybe move that to a subclass later.
+ */
 public class Particle extends Drawable{
 
     public double x;
