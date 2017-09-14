@@ -24,7 +24,7 @@ public class Box extends Thing {
     }
 
     @Override
-    public List<Thing> update(List<Thing> list) {
+    public List<Drawable> update(List<Thing> list) {
         return null;
     }
 }

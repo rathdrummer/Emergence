@@ -5,12 +5,17 @@ import java.awt.*;
 public abstract class Drawable {
 
 
+    public double x;
+    public double y;
+    public double width;
+    public double height;
+    public Image image;
 
     boolean remove; // false by default!
 
 
-    public abstract double x();
-    public abstract double y();
+    public double x(){return x;}
+    public double y() {return y;}
 
     public boolean toRemove() {return remove;}
 
@@ -28,10 +33,10 @@ public abstract class Drawable {
         return y()+height()/2;
     };
 
-    public abstract double width();
-    public abstract double height();
+    public double width(){return width;}
+    public double height(){return height;}
 
-    public abstract Image getImage();
+    public Image getImage() {return image;}
 
     public void remove(){this.remove = true;}
 }

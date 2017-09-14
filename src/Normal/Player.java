@@ -79,7 +79,7 @@ public class Player extends Thing{
 
 
     @Override
-    public List<Thing> update(List<Thing> things){
+    public List<Drawable> update(List<Thing> things){
 
         double range = 0.1;
 
@@ -136,7 +136,7 @@ public class Player extends Thing{
 
         handleCollisions(things, false, true);
 
-        ArrayList<Thing> newThings = new ArrayList<>();
+        ArrayList<Drawable> newThings = new ArrayList<>();
 
         Projectile orb = new Projectile(xC(), yC(),new Sprite("orb"), direction.getAngle(),10);
         orb.setPosition(orb.centreOnLeftCorner());

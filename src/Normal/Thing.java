@@ -221,8 +221,8 @@ public abstract class Thing extends Drawable{
         Wrapper for the update so we do not have to write duplicate code,
         Here we put code that all "Things" should run, like update their sprite and such.
     */
-    public final List<Thing> tick(List<Thing> things) {
-        List<Thing> newThings = update(things);
+    public final List<Drawable> tick(List<Thing> things) {
+        List<Drawable> newThings = update(things);
 
         if (animate) {
             Sprite sprite = getSprite();
@@ -271,7 +271,7 @@ public abstract class Thing extends Drawable{
         }
     }
 
-    public abstract List<Thing> update(List<Thing> list);
+    public abstract List<Drawable> update(List<Thing> list);
 
     public double clamp(double val, double range){
         return Math.max(-range, Math.min(range, val));
