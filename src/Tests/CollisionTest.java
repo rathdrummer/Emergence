@@ -25,6 +25,42 @@ public class CollisionTest {
      }
 
     @Test
+    public void centeredCorrectly() {
+        Collision test = new Collision(10, 10, 20, 20);
+
+        Assert.assertTrue(test.getX() == 0);
+        Assert.assertTrue(test.getY() == 0);
+        Assert.assertTrue(test.getWidth() == 20);
+        Assert.assertTrue(test.getHeight() == 20);
+    }
+
+    @Test
+    public void constructorsWorksTheSame() {
+        Collision doubleConstructor = new Collision((double) 10, (double) 10, (double) 20, (double) 20);
+        Collision intConstructor = new Collision(10, 10, 20, 20);
+
+        Assert.assertTrue(doubleConstructor.equals(intConstructor));
+    }
+
+    @Test
+    public void speedBoxTest() {
+        Collision speedBox = Collision.speedBox(10, 12, 20, 24, 2, 4);
+        Assert.assertTrue(speedBox.getX() == 0);
+        Assert.assertTrue(speedBox.getY() == 0);
+        Assert.assertTrue(speedBox.getWidth() == 22);
+        Assert.assertTrue(speedBox.getHeight() == 28);
+    }
+
+    @Test
+    public void negativeSpeedBoxTest() {
+        Collision speedBox = Collision.speedBox(10, 12, 20, 24, -2, -4);
+        Assert.assertTrue(speedBox.getX() == -2);
+        Assert.assertTrue(speedBox.getY() == -4);
+        Assert.assertTrue(speedBox.getWidth() == 22);
+        Assert.assertTrue(speedBox.getHeight() == 28);
+    }
+
+    @Test
     public void stackedItemsDoNotCollide() {
         Collision first  = new Collision(0,0,30,30);
         Collision second = new Collision(30, 0, 30, 30);
@@ -95,7 +131,7 @@ public class CollisionTest {
     }
 
     @Test
-    public void calulatesClosest() {
+    public void calculatesClosest() {
         Collision first  = new Collision(0,0,30,30);
         Collision second = new Collision(3, 4, 30, 30);
 

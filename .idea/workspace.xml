@@ -1,10 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/Normal/Player.java" line="110" mnemonic="8" />
+    <bookmark url="file://$PROJECT_DIR$/src/Normal/Player.java" line="111" mnemonic="8" />
+    <bookmark url="file://$PROJECT_DIR$/src/Normal/Main.java" line="82" mnemonic="7" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="06e67292-2bf9-46f7-8d90-314eb547ff5b" name="Default" comment="" />
+    <list default="true" id="06e67292-2bf9-46f7-8d90-314eb547ff5b" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Tests/PlayerTest.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/sounds/bom.wav" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/resources/sounds/crow.wav" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Emergence/Normal/Collision.class" afterPath="$PROJECT_DIR$/out/production/Emergence/Normal/Collision.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Emergence/Normal/Main$1.class" afterPath="$PROJECT_DIR$/out/production/Emergence/Normal/Main$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Emergence/Normal/Main.class" afterPath="$PROJECT_DIR$/out/production/Emergence/Normal/Main.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Emergence/Normal/Player.class" afterPath="$PROJECT_DIR$/out/production/Emergence/Normal/Player.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Emergence/Tests/CollisionTest.class" afterPath="$PROJECT_DIR$/out/production/Emergence/Tests/CollisionTest.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/music/forest-flute.wav" afterPath="$PROJECT_DIR$/resources/music/forest-flute.wav" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/music/forest-strings.wav" afterPath="$PROJECT_DIR$/resources/music/forest-strings.wav" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Normal/Blob.java" afterPath="$PROJECT_DIR$/src/Normal/Blob.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Normal/Box.java" afterPath="$PROJECT_DIR$/src/Normal/Box.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Normal/Collision.java" afterPath="$PROJECT_DIR$/src/Normal/Collision.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Normal/Main.java" afterPath="$PROJECT_DIR$/src/Normal/Main.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Normal/Player.java" afterPath="$PROJECT_DIR$/src/Normal/Player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Normal/Thing.java" afterPath="$PROJECT_DIR$/src/Normal/Thing.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Tests/CollisionTest.java" afterPath="$PROJECT_DIR$/src/Tests/CollisionTest.java" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -28,18 +48,50 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Normal/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="193">
-              <caret line="41" column="73" selection-start-line="41" selection-start-column="73" selection-end-line="41" selection-end-column="73" />
+            <state relative-caret-position="184">
+              <caret line="33" column="36" selection-start-line="33" selection-start-column="36" selection-end-line="33" selection-end-column="36" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CameraFollower.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Normal/CameraFollower.java">
+      <file leaf-file-name="PlayerTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Tests/PlayerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="397">
-              <caret line="44" column="29" selection-start-line="44" selection-start-column="29" selection-end-line="44" selection-end-column="29" />
+            <state relative-caret-position="323">
+              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LibraryTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Tests/LibraryTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Normal/Player.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="433">
+              <caret line="52" column="27" selection-start-line="52" selection-start-column="27" selection-end-line="52" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Collision.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Normal/Collision.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="251">
+              <caret line="229" column="8" selection-start-line="229" selection-start-column="8" selection-end-line="229" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -48,29 +100,10 @@
       <file leaf-file-name="Drawable.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Normal/Drawable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Tile.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Normal/Tile.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="30" column="88" selection-start-line="30" selection-start-column="88" selection-end-line="30" selection-end-column="88" />
+            <state relative-caret-position="255">
+              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding>
-                <element signature="e#1175#1176#0" expanded="true" />
-                <element signature="e#1199#1200#0" expanded="true" />
-                <element signature="e#1238#1239#0" expanded="true" />
-                <element signature="e#1262#1263#0" expanded="true" />
-                <element signature="e#1305#1306#0" expanded="true" />
-                <element signature="e#1333#1334#0" expanded="true" />
-                <element signature="e#1377#1378#0" expanded="true" />
-                <element signature="e#1406#1407#0" expanded="true" />
-                <element signature="e#1437#1438#0" expanded="true" />
-                <element signature="e#1465#1466#0" expanded="true" />
+                <element signature="e#278#279#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -79,59 +112,37 @@
       <file leaf-file-name="Thing.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Normal/Thing.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
-              <caret line="252" column="0" selection-start-line="252" selection-start-column="0" selection-end-line="252" selection-end-column="0" />
+            <state relative-caret-position="190">
+              <caret line="316" column="9" selection-start-line="316" selection-start-column="8" selection-end-line="316" selection-end-column="9" />
               <folding>
-                <element signature="e#2885#2886#0" expanded="true" />
-                <element signature="e#2930#2931#0" expanded="true" />
-                <element signature="e#4896#4897#0" expanded="true" />
-                <element signature="e#4927#4928#0" expanded="true" />
-                <element signature="e#4965#4966#0" expanded="true" />
-                <element signature="e#4995#4996#0" expanded="true" />
+                <element signature="e#1095#1096#0" expanded="true" />
+                <element signature="e#1127#1128#0" expanded="true" />
                 <element signature="method#addSprite#1;class#Thing#0" expanded="false" />
                 <element signature="method#clamp2#0;class#Thing#0" expanded="false" />
-                <element signature="e#5740#5741#0" expanded="true" />
-                <element signature="e#5789#5790#0" expanded="true" />
                 <element signature="class#Vector#0;class#Thing#0" expanded="false" />
                 <element signature="method#updateSpeed#0;class#Thing#0" expanded="false" />
                 <element signature="method#friction#0;class#Thing#0" expanded="false" />
-                <marker date="1505342437582" expanded="false" signature="6414:8040" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Normal/Player.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1105">
-              <caret line="110" column="46" selection-start-line="110" selection-start-column="46" selection-end-line="110" selection-end-column="46" />
-              <folding>
-                <element signature="e#4092#4093#0" expanded="true" />
-                <element signature="e#4120#4121#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Blob.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Blob.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Normal/Blob.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+            <state relative-caret-position="323">
+              <caret line="25" column="45" selection-start-line="25" selection-start-column="45" selection-end-line="25" selection-end-column="45" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Library.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Normal/Library.java">
+      <file leaf-file-name="CollisionTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Tests/CollisionTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="76" column="32" selection-start-line="76" selection-start-column="32" selection-end-line="76" selection-end-column="32" />
-              <folding>
-                <element signature="method#tint#2;class#Library#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="429">
+              <caret line="57" column="47" selection-start-line="57" selection-start-column="47" selection-end-line="57" selection-end-column="47" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -139,8 +150,8 @@
       <file leaf-file-name="Box.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Normal/Box.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+            <state relative-caret-position="357">
+              <caret line="21" column="43" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -154,8 +165,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit4 Test Class" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -192,8 +203,6 @@
         <option value="$PROJECT_DIR$/src/Input.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/Player.java" />
-        <option value="$PROJECT_DIR$/src/Tests/CollisionTest.java" />
-        <option value="$PROJECT_DIR$/src/Normal/Collision.java" />
         <option value="$PROJECT_DIR$/src/Normal/ImageRes.java" />
         <option value="$PROJECT_DIR$/src/Normal/LibraryTest.java" />
         <option value="$PROJECT_DIR$/src/Normal/Library.java" />
@@ -206,15 +215,19 @@
         <option value="$PROJECT_DIR$/src/Normal/SpriteTest.java" />
         <option value="$PROJECT_DIR$/src/Tests/SpriteTest.java" />
         <option value="$PROJECT_DIR$/src/Normal/Sprite.java" />
-        <option value="$PROJECT_DIR$/src/Normal/Thing.java" />
         <option value="$PROJECT_DIR$/src/Normal/Tile.java" />
-        <option value="$PROJECT_DIR$/src/Normal/Player.java" />
         <option value="$PROJECT_DIR$/src/Normal/Stepper.java" />
         <option value="$PROJECT_DIR$/src/Normal/Constants.java" />
         <option value="$PROJECT_DIR$/src/Normal/CameraFollower.java" />
         <option value="$PROJECT_DIR$/src/Normal/Box.java" />
-        <option value="$PROJECT_DIR$/src/Normal/Main.java" />
         <option value="$PROJECT_DIR$/src/Normal/Blob.java" />
+        <option value="$PROJECT_DIR$/src/Tests/CollisionTest.java" />
+        <option value="$PROJECT_DIR$/src/Tests/Player.java" />
+        <option value="$PROJECT_DIR$/src/Normal/Player.java" />
+        <option value="$PROJECT_DIR$/src/Normal/Main.java" />
+        <option value="$PROJECT_DIR$/src/Normal/Thing.java" />
+        <option value="$PROJECT_DIR$/src/Tests/PlayerTest.java" />
+        <option value="$PROJECT_DIR$/src/Normal/Collision.java" />
       </list>
     </option>
   </component>
@@ -256,8 +269,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -326,27 +338,10 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Emergence" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Emergence" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -372,140 +367,16 @@
     <key name="CreateTestDialog.RecentsKey">
       <recent name="Normal" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Documents\GitHub\Emergence\resources\images" />
-    </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
     <key name="CreateClassDialog.RecentsKey">
       <recent name="Normal" />
       <recent name="" />
     </key>
-  </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/Emergence/Normal/Backend$TAdapter.class</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/Emergence/Normal/Backend.class</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/Emergence/Normal/Keys.class</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/Emergence/Normal/Main$1.class</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/Emergence/Normal/Main.class</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Normal/Backend.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Normal/Keys.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Normal/Main.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Normal/Sound.java</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/music/forest-flute.wav</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/music/forest-strings.wav</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/music/forest.wav</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/sounds/bom.wav</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/resources/sounds/crow.wav</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Documents\GitHub\Emergence\resources\images" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -535,7 +406,7 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="LibraryTest.loadImage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="CollisionTest.centeredCorrectly" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="Tests.*" />
@@ -546,8 +417,8 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="Tests" />
-      <option name="MAIN_CLASS_NAME" value="Tests.LibraryTest" />
-      <option name="METHOD_NAME" value="loadImage" />
+      <option name="MAIN_CLASS_NAME" value="Tests.CollisionTest" />
+      <option name="METHOD_NAME" value="centeredCorrectly" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -561,7 +432,7 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="LibraryTest.doWeOptimizeMultipleLoads" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="CollisionTest.constructorsWorksTheSame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="Tests.*" />
@@ -572,8 +443,8 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="Tests" />
-      <option name="MAIN_CLASS_NAME" value="Tests.LibraryTest" />
-      <option name="METHOD_NAME" value="doWeOptimizeMultipleLoads" />
+      <option name="MAIN_CLASS_NAME" value="Tests.CollisionTest" />
+      <option name="METHOD_NAME" value="constructorsWorksTheSame" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -587,7 +458,7 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="LibraryTest.optimizeWhen" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="CollisionTest.speedBoxTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="Tests.*" />
@@ -598,8 +469,8 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="Tests" />
-      <option name="MAIN_CLASS_NAME" value="Tests.LibraryTest" />
-      <option name="METHOD_NAME" value="optimizeWhen" />
+      <option name="MAIN_CLASS_NAME" value="Tests.CollisionTest" />
+      <option name="METHOD_NAME" value="speedBoxTest" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -613,7 +484,7 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="SpriteTest.updateWorks" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="PlayerTest.collisionBoxInRightPlace" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="Tests.*" />
@@ -624,8 +495,8 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="Tests" />
-      <option name="MAIN_CLASS_NAME" value="Tests.SpriteTest" />
-      <option name="METHOD_NAME" value="updateWorks" />
+      <option name="MAIN_CLASS_NAME" value="Tests.PlayerTest" />
+      <option name="METHOD_NAME" value="collisionBoxInRightPlace" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -886,18 +757,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Application.Main" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.LibraryTest.loadImage" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.LibraryTest.doWeOptimizeMultipleLoads" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.LibraryTest.optimizeWhen" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.SpriteTest.updateWorks" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.CollisionTest.centeredCorrectly" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.CollisionTest.constructorsWorksTheSame" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.CollisionTest.speedBoxTest" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.PlayerTest.collisionBoxInRightPlace" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Application.Main" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.SpriteTest.updateWorks" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.LibraryTest.optimizeWhen" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.LibraryTest.doWeOptimizeMultipleLoads" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.LibraryTest.loadImage" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.PlayerTest.collisionBoxInRightPlace" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.CollisionTest.speedBoxTest" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.CollisionTest.constructorsWorksTheSame" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.CollisionTest.centeredCorrectly" />
       </list>
     </recent_temporary>
   </component>
@@ -992,44 +863,51 @@
       <option name="project" value="LOCAL" />
       <updated>1505344392050</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="new pictures and animations, camera bounds">
+      <created>1505344398137</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1505344398137</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="LibraryTest_doWeOptimizeMultipleLoads - 2017.09.13 at 14h 16m 42s.xml">
-      <configuration name="LibraryTest.doWeOptimizeMultipleLoads" configurationId="JUnit" />
+    <history-entry file="CollisionTest_speedBoxTest - 2017.09.14 at 12h 02m 15s.xml">
+      <configuration name="CollisionTest.speedBoxTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LibraryTest_loadImage - 2017.09.13 at 13h 57m 51s.xml">
-      <configuration name="LibraryTest.loadImage" configurationId="JUnit" />
+    <history-entry file="CollisionTest_speedBoxTest - 2017.09.14 at 12h 02m 23s.xml">
+      <configuration name="CollisionTest.speedBoxTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LibraryTest_loadImage - 2017.09.13 at 13h 58m 01s.xml">
-      <configuration name="LibraryTest.loadImage" configurationId="JUnit" />
+    <history-entry file="CollisionTest_speedBoxTest - 2017.09.14 at 12h 05m 24s.xml">
+      <configuration name="CollisionTest.speedBoxTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LibraryTest_loadImage - 2017.09.13 at 13h 58m 22s.xml">
-      <configuration name="LibraryTest.loadImage" configurationId="JUnit" />
+    <history-entry file="PlayerTest_collisionBoxInRightPlace - 2017.09.14 at 14h 17m 40s.xml">
+      <configuration name="PlayerTest.collisionBoxInRightPlace" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LibraryTest_loadImage - 2017.09.13 at 13h 59m 51s.xml">
-      <configuration name="LibraryTest.loadImage" configurationId="JUnit" />
+    <history-entry file="PlayerTest_collisionBoxInRightPlace - 2017.09.14 at 14h 20m 23s.xml">
+      <configuration name="PlayerTest.collisionBoxInRightPlace" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="LibraryTest_optimizeWhen - 2017.09.13 at 14h 28m 25s.xml">
-      <configuration name="LibraryTest.optimizeWhen" configurationId="JUnit" />
+    <history-entry file="PlayerTest_collisionBoxInRightPlace - 2017.09.14 at 14h 56m 21s.xml">
+      <configuration name="PlayerTest.collisionBoxInRightPlace" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SpriteTest_updateWorks - 2017.09.13 at 22h 21m 19s.xml">
-      <configuration name="SpriteTest.updateWorks" configurationId="JUnit" />
+    <history-entry file="PlayerTest_collisionBoxInRightPlace - 2017.09.14 at 14h 56m 26s.xml">
+      <configuration name="PlayerTest.collisionBoxInRightPlace" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SpriteTest_updateWorks - 2017.09.13 at 22h 21m 32s.xml">
-      <configuration name="SpriteTest.updateWorks" configurationId="JUnit" />
+    <history-entry file="PlayerTest_collisionBoxInRightPlace - 2017.09.14 at 14h 58m 24s.xml">
+      <configuration name="PlayerTest.collisionBoxInRightPlace" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SpriteTest_updateWorks - 2017.09.13 at 22h 22m 17s.xml">
-      <configuration name="SpriteTest.updateWorks" configurationId="JUnit" />
+    <history-entry file="PlayerTest_collisionBoxInRightPlace - 2017.09.14 at 15h 59m 25s.xml">
+      <configuration name="PlayerTest.collisionBoxInRightPlace" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="SpriteTest_updateWorks - 2017.09.13 at 22h 23m 20s.xml">
-      <configuration name="SpriteTest.updateWorks" configurationId="JUnit" />
+    <history-entry file="PlayerTest_collisionBoxInRightPlace - 2017.09.14 at 15h 59m 39s.xml">
+      <configuration name="PlayerTest.collisionBoxInRightPlace" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1039,13 +917,12 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="PsiViewer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32875264" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32875264" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24010417" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1058,6 +935,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298611" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1087,13 +965,31 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Tests/CollisionTest.java</url>
-          <line>42</line>
+          <url>file://$PROJECT_DIR$/src/Normal/Main.java</url>
+          <line>81</line>
           <properties />
-          <option name="timeStamp" value="5" />
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Normal/Player.java</url>
+          <line>51</line>
+          <properties />
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Tests/PlayerTest.java</url>
+          <line>19</line>
+          <properties />
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Normal/Player.java</url>
+          <line>50</line>
+          <properties />
+          <option name="timeStamp" value="24" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="18" />
+      <option name="time" value="25" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
@@ -1106,14 +1002,90 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/resources/sounds/bom.wav">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Normal/CameraFollower.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="44" column="29" selection-start-line="44" selection-start-column="29" selection-end-line="44" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Normal/Drawable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+          <folding>
+            <element signature="e#278#279#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Normal/Tile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="30" column="88" selection-start-line="30" selection-start-column="88" selection-end-line="30" selection-end-column="88" />
+          <folding>
+            <element signature="e#1175#1176#0" expanded="true" />
+            <element signature="e#1199#1200#0" expanded="true" />
+            <element signature="e#1238#1239#0" expanded="true" />
+            <element signature="e#1262#1263#0" expanded="true" />
+            <element signature="e#1305#1306#0" expanded="true" />
+            <element signature="e#1333#1334#0" expanded="true" />
+            <element signature="e#1377#1378#0" expanded="true" />
+            <element signature="e#1406#1407#0" expanded="true" />
+            <element signature="e#1437#1438#0" expanded="true" />
+            <element signature="e#1465#1466#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Normal/Thing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2193">
+          <caret line="184" column="0" selection-start-line="184" selection-start-column="0" selection-end-line="184" selection-end-column="0" />
+          <folding>
+            <element signature="e#1095#1096#0" expanded="true" />
+            <element signature="e#1127#1128#0" expanded="true" />
+            <element signature="method#addSprite#1;class#Thing#0" expanded="false" />
+            <element signature="method#clamp2#0;class#Thing#0" expanded="false" />
+            <element signature="class#Vector#0;class#Thing#0" expanded="false" />
+            <element signature="method#updateSpeed#0;class#Thing#0" expanded="false" />
+            <element signature="method#friction#0;class#Thing#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Normal/Blob.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Normal/Box.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Normal/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1785">
           <caret line="111" column="0" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
-          <folding>
-            <element signature="e#4345#4346#0" expanded="true" />
-            <element signature="e#4377#4378#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1130,20 +1102,13 @@
         <state relative-caret-position="255">
           <caret line="16" column="32" selection-start-line="16" selection-start-column="32" selection-end-line="16" selection-end-column="32" />
           <folding>
-            <element signature="e#2885#2886#0" expanded="true" />
-            <element signature="e#2930#2931#0" expanded="true" />
-            <element signature="e#4896#4897#0" expanded="true" />
-            <element signature="e#4927#4928#0" expanded="true" />
-            <element signature="e#4965#4966#0" expanded="true" />
-            <element signature="e#4995#4996#0" expanded="true" />
+            <element signature="e#1095#1096#0" expanded="true" />
+            <element signature="e#1127#1128#0" expanded="true" />
             <element signature="method#addSprite#1;class#Thing#0" expanded="false" />
             <element signature="method#clamp2#0;class#Thing#0" expanded="false" />
-            <element signature="e#5740#5741#0" expanded="true" />
-            <element signature="e#5789#5790#0" expanded="true" />
             <element signature="class#Vector#0;class#Thing#0" expanded="false" />
             <element signature="method#updateSpeed#0;class#Thing#0" expanded="false" />
             <element signature="method#friction#0;class#Thing#0" expanded="false" />
-            <marker date="1505342437582" expanded="false" signature="6414:8040" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -1152,10 +1117,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="18" column="31" selection-start-line="18" selection-start-column="31" selection-end-line="18" selection-end-column="31" />
-          <folding>
-            <element signature="e#4092#4093#0" expanded="true" />
-            <element signature="e#4120#4121#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1164,8 +1126,10 @@
         <state relative-caret-position="1309">
           <caret line="98" column="0" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
           <folding>
-            <element signature="e#2399#2400#0" expanded="true" />
-            <element signature="e#2443#2444#0" expanded="true" />
+            <element signature="e#620#621#0" expanded="true" />
+            <element signature="e#686#687#0" expanded="true" />
+            <element signature="e#1564#1565#0" expanded="true" />
+            <element signature="e#1608#1609#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1175,7 +1139,6 @@
         <state relative-caret-position="391">
           <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="false" />
             <element signature="method#tint#2;class#Library#0" expanded="false" />
           </folding>
         </state>
@@ -1185,9 +1148,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1195,11 +1156,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="731">
           <caret line="48" column="37" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1345#1346#0" expanded="false" />
-            <element signature="e#1412#1413#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1226,62 +1182,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Normal/Collision.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="152" column="39" selection-start-line="152" selection-start-column="39" selection-end-line="152" selection-end-column="39" />
-          <folding>
-            <element signature="e#2237#2238#0" expanded="false" />
-            <element signature="e#2261#2262#0" expanded="false" />
-            <element signature="e#2286#2287#0" expanded="false" />
-            <element signature="e#2310#2311#0" expanded="false" />
-            <element signature="e#2339#2340#0" expanded="false" />
-            <element signature="e#2367#2368#0" expanded="false" />
-            <element signature="e#2397#2398#0" expanded="false" />
-            <element signature="e#2426#2427#0" expanded="false" />
-            <element signature="e#5175#5176#0" expanded="false" />
-            <element signature="e#5224#5225#0" expanded="false" />
-            <element signature="e#5267#5268#0" expanded="false" />
-            <element signature="e#5346#5347#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Tests/CollisionTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Normal/ImageRes.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="731">
           <caret line="48" column="37" selection-start-line="48" selection-start-column="37" selection-end-line="48" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1345#1346#0" expanded="false" />
-            <element signature="e#1412#1413#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Tests/LibraryTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="44" column="50" selection-start-line="44" selection-start-column="50" selection-end-line="44" selection-end-column="50" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Normal/Sound.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1297,7 +1201,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1306,9 +1209,9 @@
         <state relative-caret-position="323">
           <caret line="19" column="60" selection-start-line="19" selection-start-column="60" selection-end-line="19" selection-end-column="60" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#518#519#0" expanded="true" />
-            <element signature="e#562#563#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#518#519#0" expanded="false" />
+            <element signature="e#562#563#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1317,24 +1220,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Normal/SpriteListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Normal/SpriteListener.java" />
     <entry file="file://$PROJECT_DIR$/src/Tests/SpriteTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
           <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1362,17 +1257,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Normal/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1105">
-          <caret line="110" column="46" selection-start-line="110" selection-start-column="46" selection-end-line="110" selection-end-column="46" />
-          <folding>
-            <element signature="e#4092#4093#0" expanded="true" />
-            <element signature="e#4120#4121#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Normal/Stepper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
@@ -1384,37 +1268,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Normal/Thing.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="252" column="0" selection-start-line="252" selection-start-column="0" selection-end-line="252" selection-end-column="0" />
-          <folding>
-            <element signature="e#2885#2886#0" expanded="true" />
-            <element signature="e#2930#2931#0" expanded="true" />
-            <element signature="e#4896#4897#0" expanded="true" />
-            <element signature="e#4927#4928#0" expanded="true" />
-            <element signature="e#4965#4966#0" expanded="true" />
-            <element signature="e#4995#4996#0" expanded="true" />
-            <element signature="method#addSprite#1;class#Thing#0" expanded="false" />
-            <element signature="method#clamp2#0;class#Thing#0" expanded="false" />
-            <element signature="e#5740#5741#0" expanded="true" />
-            <element signature="e#5789#5790#0" expanded="true" />
-            <element signature="class#Vector#0;class#Thing#0" expanded="false" />
-            <element signature="method#updateSpeed#0;class#Thing#0" expanded="false" />
-            <element signature="method#friction#0;class#Thing#0" expanded="false" />
-            <marker date="1505342437582" expanded="false" signature="6414:8040" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Normal/Drawable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Normal/Backend.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -1423,35 +1276,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Normal/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="41" selection-start-line="9" selection-start-column="41" selection-end-line="9" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Normal/Constants.java" />
     <entry file="file://$PROJECT_DIR$/src/Normal/CameraFollower.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
+        <state relative-caret-position="714">
           <caret line="44" column="29" selection-start-line="44" selection-start-column="29" selection-end-line="44" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Normal/Box.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Normal/Tile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
+        <state relative-caret-position="510">
           <caret line="30" column="88" selection-start-line="30" selection-start-column="88" selection-end-line="30" selection-end-column="88" />
           <folding>
             <element signature="e#1175#1176#0" expanded="true" />
@@ -1473,18 +1309,110 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Normal/Main.java">
+    <entry file="file://$PROJECT_DIR$/resources/sounds/bom.wav" />
+    <entry file="file://$PROJECT_DIR$/resources/images/person.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Normal/Box.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="41" column="73" selection-start-line="41" selection-start-column="73" selection-end-line="41" selection-end-column="73" />
-          <folding />
+        <state relative-caret-position="357">
+          <caret line="21" column="43" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Normal/Blob.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+        <state relative-caret-position="323">
+          <caret line="25" column="45" selection-start-line="25" selection-start-column="45" selection-end-line="25" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Normal/Sound.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="46" column="32" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Tests/CollisionTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="429">
+          <caret line="57" column="47" selection-start-line="57" selection-start-column="47" selection-end-line="57" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Tests/LibraryTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Normal/Drawable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding>
+            <element signature="e#278#279#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Normal/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="33" column="36" selection-start-line="33" selection-start-column="36" selection-end-line="33" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Normal/Thing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="316" column="9" selection-start-line="316" selection-start-column="8" selection-end-line="316" selection-end-column="9" />
+          <folding>
+            <element signature="e#1095#1096#0" expanded="true" />
+            <element signature="e#1127#1128#0" expanded="true" />
+            <element signature="method#addSprite#1;class#Thing#0" expanded="false" />
+            <element signature="method#clamp2#0;class#Thing#0" expanded="false" />
+            <element signature="class#Vector#0;class#Thing#0" expanded="false" />
+            <element signature="method#updateSpeed#0;class#Thing#0" expanded="false" />
+            <element signature="method#friction#0;class#Thing#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Tests/PlayerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Normal/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="433">
+          <caret line="52" column="27" selection-start-line="52" selection-start-column="27" selection-end-line="52" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Normal/Collision.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="229" column="8" selection-start-line="229" selection-start-column="8" selection-end-line="229" selection-end-column="8" />
           <folding />
         </state>
       </provider>

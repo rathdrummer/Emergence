@@ -1,7 +1,6 @@
 package Normal;
 
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.Control;
 import javax.sound.sampled.FloatControl;
 import javax.swing.*;
 import java.awt.*;
@@ -32,7 +31,7 @@ public class Main extends JFrame {
     */
 
     public Main(){
-        player = new Player("circle.png");
+        player = new Player(100, 200);
         cam = new CameraFollower(player);
 
         for (int i = 0; i < 256; i++) {
@@ -65,18 +64,23 @@ public class Main extends JFrame {
 
 
         addThing(player);
+
         addThing(new Blob(100,100));
         addThing(new Blob(150,100));
         addThing(new Blob(100,150));
         addThing(new Blob(300,500));
 
 
+
         //creating two listener that calls our update and render functions and sending them to the controller
         this.controller = new Backend(e -> update(), this::render);
         initUI();
 
-        clip = Sound.playMusic("forest-flute");
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
+        clip = null;
+        //Todo, this casts an error , RIFFInvalidDateException: Chunk size too big
+        //On further inspection i find that I cannot play the file even externally so it is probably a fault of the file
+        //clip = Sound.playMusic("forest-flute");
+        //clip.loop(Clip.LOOP_CONTINUOUSLY);
         //Sound.playMusic("forest-strings").loop(Clip.LOOP_CONTINUOUSLY);
     }
 
@@ -98,7 +102,7 @@ public class Main extends JFrame {
 
         if (controller.isPressed(Keys.SOUND)) {
 
-            if (!isPressed) {
+            if (!isPressed && clip != null) {
                 isPressed = true;
                 long time = System.currentTimeMillis();
                 FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
@@ -133,6 +137,17 @@ public class Main extends JFrame {
                     (int)d.width(),
                     (int)d.height(),
                     null) ;
+
+            /*
+            if (!(d instanceof Tile)) {
+                g2d.fillOval((int) (d.xC() - 2 - xOffset), (int) (d.yC() - 2 - yOffset), 4, 4);
+                if (d instanceof Thing) {
+                    Thing thing = (Thing) d;
+                    Collision c = thing.getCollision();
+                    g2d.drawRect(c.getX() - (int) xOffset, c.getY() - (int) yOffset, c.getWidth(), c.getHeight());
+                }
+            }
+             */
         }
 
     }

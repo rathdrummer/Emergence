@@ -22,15 +22,27 @@ public class Collision {
         this.height = 0;
     }
 
-    public Collision(int x, int y, int width, int height) {
-        this.x = x;
-        this.y = y;
+
+    public static Collision speedBox(double xCenter, double yCenter, double width, double height, double dx, double dy) {
+        double transX = (dx > 0) ? 0 : dx;
+        double transY = (dy > 0) ? 0 : dy;
+
+        Collision collision =  new Collision(xCenter + transX, yCenter + transY, width, height);
+        //we split this so that the collision knows where the center is based on the original width and height
+        collision.updateSize(width + Math.abs(dx), height + Math.abs(dy), false);
+
+        return collision;
+    }
+
+    public Collision(int xCenter, int yCenter, int width, int height) {
+        this.x = xCenter - width/2;
+        this.y = yCenter - height/2;
         this.width = width;
         this.height = height;
     }
 
-    public Collision(double x, double y, double width, double height) {
-        this((int) x, (int) y, (int) width, (int) height);
+    public Collision(double xCenter, double yCenter, double width, double height) {
+        this((int) xCenter, (int) yCenter, (int) width, (int) height);
     }
 
     public void updatePosition(int x, int y) {
@@ -150,13 +162,6 @@ public class Collision {
         return thoseWhoCollides;
     }
 
-    public static Collision speedBox(double x, double y, double width, double height, double dx, double dy) {
-        double transX = (dx > 0) ? 0 : dx;
-        double transY = (dy > 0) ? 0 : dy;
-
-        return new Collision(x + transX, y + transY, width + Math.abs(dx), height + Math.abs(dy));
-    }
-
     public Collision closest(List<Collision> collisions) {
         double closestDistance = 0;
         Collision closest = null;
@@ -211,14 +216,44 @@ public class Collision {
         return Math.sqrt( Math.pow(c.x - x, 2) + Math.pow(c.y - y, 2) );
     }
 
-    public void updatePosition(double x, double y) {
-        this.x = (int) x;
-        this.y = (int) y;
+    public void updatePosition(double xCenter, double yCenter) {
+        this.x = (int) xCenter - width / 2;
+        this.y = (int) yCenter - height / 2;
     }
 
-    public void updateSize(double width, double height) {
+    public void updateSize(double width, double height, boolean reCenter) {
+        int oldWidth = this.width;
+        int oldHeight = this.height;
+
         this.width = (int) width;
         this.height = (int) height;
+
+        if (reCenter) {
+            this.x += oldWidth - width;
+            this.y += oldHeight - height;
+        }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Collision collision = (Collision) o;
+
+        if (getX() != collision.getX()) return false;
+        if (getY() != collision.getY()) return false;
+        if (getWidth() != collision.getWidth()) return false;
+        return getHeight() == collision.getHeight();
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getX();
+        result = 31 * result + getY();
+        result = 31 * result + getWidth();
+        result = 31 * result + getHeight();
+        return result;
+    }
 }

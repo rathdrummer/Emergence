@@ -174,10 +174,15 @@ public abstract class Thing implements Drawable{
         if (animationType.equals(currentSprite)) {
             return true;
         }
+        getSprite().setImageIndex(0); // restarts the old sprite
         return changeSpriteTo(animationType, 0);
     }
 
     private boolean changeSpriteTo(AnimationType animationType, int index) {
+        if (!animationType.equals(currentSprite)) {
+            getSprite().setImageIndex(0); // resets the old sprite
+        }
+
         Sprite spr = sprites.get(animationType);
         if (spr != null) {
             currentSprite = animationType;
@@ -283,7 +288,7 @@ public abstract class Thing implements Drawable{
     }
 
     protected void handleCollisions(List<Thing> things, boolean stopWhenHitWall) {
-        Collision c = Collision.speedBox(x,y,width, height, dx, dy);
+        Collision c = Collision.speedBox(xC(),yC(),width, height, dx, dy);
 
 
         List<Thing> allPossibleCollisions = c.collidesWithThing(things, this);
@@ -292,7 +297,7 @@ public abstract class Thing implements Drawable{
         int newDX = (int) dx;
         int oldSign = (int) Math.signum(dx);
 
-        c = Collision.speedBox(x, y, width, height, newDX, 0);
+        c = Collision.speedBox(xC(), yC(), width, height, newDX, 0);
         List<Thing> allXCollisions = c.collidesWithThing(allPossibleCollisions, this);
         if (stopWhenHitWall && !allXCollisions.isEmpty()) {
             dx = 0;
@@ -305,7 +310,7 @@ public abstract class Thing implements Drawable{
             if (Math.signum(newDX) != oldSign) {
                 newDX = 0;
             }
-            c = Collision.speedBox(x,y,width,height, newDX, 0);
+            c = Collision.speedBox(xC(),yC(),width,height, newDX, 0);
             allXCollisions = c.collidesWithThing(allXCollisions, this);
         }
 
@@ -315,7 +320,7 @@ public abstract class Thing implements Drawable{
         int newDY = (int) dy;
         oldSign = (int) Math.signum(dy);
 
-        c = Collision.speedBox(x, y, width, height, 0, newDY);
+        c = Collision.speedBox(xC(), yC(), width, height, 0, newDY);
         List<Thing> allYCollisions = c.collidesWithThing(allPossibleCollisions, this);
 
         if (stopWhenHitWall && !allYCollisions.isEmpty()) {
@@ -328,14 +333,14 @@ public abstract class Thing implements Drawable{
             if (Math.signum(newDY) != oldSign) {
                 newDY = 0;
             }
-            c = Collision.speedBox(x,y,width,height, 0, newDY);
+            c = Collision.speedBox(xC(),yC(),width,height, 0, newDY);
             allYCollisions = c.collidesWithThing(allYCollisions, this);
         }
 
 
         y += newDY;
 
-        collision.updatePosition(x,y);
+        collision.updatePosition(xC(),yC());
     }
 
 }

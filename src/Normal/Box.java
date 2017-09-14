@@ -1,6 +1,5 @@
 package Normal;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
@@ -19,8 +18,8 @@ public class Box extends Thing {
         this.y = y - 20;
         this.width = img.getWidth();
         this.height = img.getHeight();
-        collision.updateSize(width, height);
-        collision.updatePosition(this.x, this.y);
+        collision.updateSize(width, height, false);
+        collision.updatePosition(xC(), yC());
     }
 
     @Override

@@ -15,8 +15,8 @@ public class Player extends Thing{
     private double scaleX;
     private double scaleY;
 
-    public Player(String name){
-        super(new Collision(100, 200, 0, 0));
+    public Player(double x, double y){
+        super(new Collision(x, y, 0, 0));
 
         /*add sprites to player*/
 
@@ -39,8 +39,8 @@ public class Player extends Thing{
 
         playAnimation(); //we do not want to play them from the start
 
-        x = 100;
-        y = 200;
+        this.x = x;
+        this.y = y;
         dx = 0;
         dy = 0;
         acceleration = 1;
@@ -49,7 +49,8 @@ public class Player extends Thing{
         scaleY = 1;
         height = getImage().getHeight(null);
         width = getImage().getWidth(null);
-        collision.updateSize(width,height);
+        collision.updateSize(width,height, false);
+        collision.updatePosition(xC(), yC());
     }
 
 
@@ -151,38 +152,5 @@ public class Player extends Thing{
         dx += direction*acceleration;
 
     }
-
-
-
-    @Override
-    public double height() { return height; }
-
-    @Override
-    public double width() {
-        return width;
-    }
-
-    @Override
-    public double x() {
-        return x;
-    }
-
-    @Override
-    public double y() {
-        return y;
-    }
-
-
-    @Override
-    public double xC() {
-        return (int)(x + (height * 0.5));
-    }
-
-    @Override
-    public double yC() {
-        return (int)(y + (width * 0.5));
-    }
-
-
 
 }

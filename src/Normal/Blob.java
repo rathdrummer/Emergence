@@ -15,13 +15,15 @@ public class Blob extends Thing{
         setSprite(new Sprite("blobAnimation", 50), new AnimationType(AnimationEnum.Normal));
         this.x = x;
         this.y = y;
-        collision.updateSize(getImage().getWidth(null),getImage().getHeight(null));
+        collision.updateSize(getImage().getWidth(null),getImage().getHeight(null), false);
         this.width = getImage().getWidth(null);
         this.height = getImage().getHeight(null);
 
         this.acceleration = .1;
         this.frictionAcc = 0.02;
         this.maxSpeed = 6;
+
+        collision.updatePosition(xC(), yC());
     }
 
     @Override
