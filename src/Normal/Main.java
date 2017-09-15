@@ -1,8 +1,6 @@
 package Normal;
 
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.Control;
-import javax.sound.sampled.FloatControl;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -15,12 +13,13 @@ public class Main extends JFrame {
     private final Clip clip;
     private Backend controller;
     private Player player;
-    private CameraFollower cam;
+    private Camera cam;
     private List<Thing> things = new ArrayList<>();
+    private List<Particle> particles = new ArrayList<>();
 
 
     // Stack of all the drawable objects to be shown on screen, in order.
-    public LinkedList<Drawable> objectStack = new LinkedList<>();
+    public LinkedList<Drawable> drawables = new LinkedList<>();
 
     // Camera offset - lets the camera follow the player or anything else
     private double xOffset = 0;
@@ -34,7 +33,7 @@ public class Main extends JFrame {
 
     public Main(){
         player = new Player(100, 200);
-        cam = new CameraFollower(player);
+        cam = new Camera(player);
 
         for (int i = 0; i < 256; i++) {
             int column = i % 16;
@@ -116,23 +115,24 @@ public class Main extends JFrame {
             isPressed = false;
         }*/
 
-        if (isPressed)  {
 
-        }
         // Updates
-        List<Thing> buffer = new ArrayList<>();
+        List<Drawable> buffer = new ArrayList<>();
+
+        particles.forEach(Particle::update);
+        particles.removeIf(Drawable::toRemove);
 
         for (Thing t : things) {
-            for (Thing newThing : t.tick(things)) {
+            for (Drawable newThing : t.tick(things)) {
                 buffer.add(newThing);
             }
         }
 
-        for (Thing newThing : buffer) {
+        for (Drawable newThing : buffer) {
             addThing(newThing);
         }
 
-        things.removeIf(t -> t.toRemove());
+        things.removeIf(Drawable::toRemove);
 
         cam.update(this.getContentPane().getWidth(), this.getContentPane().getHeight());
         updateOffset(cam.x()-this.getContentPane().getWidth()/2,cam.y()-this.getContentPane().getHeight()/2); // Follow the player
@@ -145,8 +145,10 @@ public class Main extends JFrame {
     public void render(Graphics2D g2d) {
 
         // Apply camera offset while drawing
-        for (Iterator<Drawable> iterator = objectStack.iterator(); iterator.hasNext(); ) {
+        for (Iterator<Drawable> iterator = drawables.iterator(); iterator.hasNext(); ) {
             Drawable d = iterator.next();
+
+
             g2d.drawImage(d.getImage(),
                     (int) (d.x() - xOffset),
                     (int) (d.y() - yOffset),
@@ -183,9 +185,11 @@ public class Main extends JFrame {
     }
 
     private void addThing(Drawable d){
-        objectStack.add(d);
+        drawables.add(d);
         if (d instanceof Thing) {
             things.add((Thing) d);
+        } else if (d instanceof Particle){
+            particles.add((Particle) d);
         }
     }
 

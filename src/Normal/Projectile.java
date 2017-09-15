@@ -24,19 +24,27 @@ public class Projectile extends Thing{
     }
 
     @Override
-    public List<Thing> update(List<Thing> list) {
+    public List<Drawable> update(List<Thing> list) {
         x +=dx;
         y +=dy;
+
+        List<Drawable> newList = new ArrayList<>();
 
         for (Thing other : list){
             if (this.collision.collides(other) && other != this.owner && (this.getClass() != other.getClass())){
                 other.harm(3, new Vector(dx, dy));
+                Camera.shake(15);
+                Sound.play("bom");
                 this.remove();
+
+                // Add particles
+                newList.addAll(Particle.spawn(20, (int) x, (int) y, Library.loadImage("circle")));
+
             }
         }
 
         getCollision().updatePosition(x,y);
 
-        return new ArrayList<>();
+        return newList;
     }
 }

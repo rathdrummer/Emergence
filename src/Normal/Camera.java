@@ -6,7 +6,7 @@ import java.awt.*;
  * An object that the camera can look at making it trail behind the player.
  * Not too complicated, the further from the player, the more it accelerates.
  */
-public class CameraFollower {
+public class Camera {
 
     private static final double RATE = 0.1;
     private static final double STOP_THRESHOLD = 0.1;
@@ -15,9 +15,11 @@ public class CameraFollower {
     private double dx;
     private double dy;
 
+    private static int shakeAmount = 0;
+
     private Drawable friend;
 
-    public CameraFollower(Drawable friend){
+    public Camera(Drawable friend){
         this.friend = friend;
         x = friend.xC();
         y = friend.yC();
@@ -41,8 +43,13 @@ public class CameraFollower {
         if (Math.abs(friend.yC()-y) > STOP_THRESHOLD) y += dy;
         else dy = 0;
 
-        x = clamp(x, width/2, 1000);
-        y = clamp(y, height/2, 1000);
+
+        Vector shake = Vector.getComponents(Math.random() * shakeAmount, Math.random() * 2 * Math.PI);
+
+        x = clamp(x + shake.x, width/2, 1000);
+        y = clamp(y + shake.y, height/2, 1000);
+
+        shakeAmount = Math.max(0, shakeAmount - 1);
     }
 
     public double x() {
@@ -52,6 +59,12 @@ public class CameraFollower {
     public double y() {
         return y;
     }
+
+    public static void shake(int intensity){
+        shakeAmount = intensity;
+    }
+
+
 
 
 }

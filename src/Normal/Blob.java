@@ -21,13 +21,13 @@ public class Blob extends Thing{
 
         this.acceleration = .1;
         this.frictionAcc = 0.02;
-        this.maxSpeed = 6;
+        this.maxSpeed = 9;
 
         collision.updatePosition(xC(), yC());
     }
 
     @Override
-    public List<Thing> update(List<Thing> things) {
+    public List<Drawable> update(List<Thing> things) {
         for (Thing t : things){
             if (t instanceof Player){
                 xGoal = t.xC();
