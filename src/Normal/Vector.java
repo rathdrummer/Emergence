@@ -25,4 +25,7 @@ public class Vector {
     }
 
 
+    public double getLength() {
+        return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+    }
 }

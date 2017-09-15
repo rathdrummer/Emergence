@@ -3,19 +3,20 @@ package Normal;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.awt.event.KeyEvent;
+import java.util.*;
 import java.util.List;
 
 public class Main extends JFrame {
 
+    private boolean debug = false;
     private final Clip clip;
     private Backend controller;
     private Player player;
     private Camera cam;
     private List<Thing> things = new ArrayList<>();
     private List<Particle> particles = new ArrayList<>();
+    private HashMap<Keys, Integer> pressedForHowlong = new HashMap<>();
 
 
     // Stack of all the drawable objects to be shown on screen, in order.
@@ -45,7 +46,7 @@ public class Main extends JFrame {
             }
         }
 
-        Stepper stepper = new Stepper(200, 200, 50);
+        Stepper stepper = new Stepper(200, 200, 45, 30);
         addThing(new Box(stepper.getX(), stepper.getY()));
         addThing(new Box(stepper.getX(), stepper.down()));
         addThing(new Box(stepper.getX(), stepper.down()));
@@ -62,6 +63,8 @@ public class Main extends JFrame {
         addThing(new Box(stepper.right(), stepper.getY()));
         addThing(new Box(stepper.right(), stepper.getY()));
         addThing(new Box(stepper.right(), stepper.getY()));
+
+        addThing(new Bush(stepper.right(), stepper.down()));
 
 
         addThing(player);
@@ -94,10 +97,54 @@ public class Main extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
+    public boolean justPressed(Keys key) {
+        return pressedForHowlong.get(key) == 1;
+    }
+
+    public boolean justReleased(Keys key) {
+        return pressedForHowlong.get(key) == -1;
+    }
+
     public void update() {
+
+
+        controller.getKeys().forEach((k,isPressed) -> {
+
+            Integer key = pressedForHowlong.get(k);
+
+            if (key == null) {
+                pressedForHowlong.put(k, 0);
+                key = pressedForHowlong.get(k);;
+            }
+
+            if (isPressed) {
+                pressedForHowlong.put(k, key + 1);
+            }
+            else {
+                if (key <= 0) {
+                    pressedForHowlong.put(k, 0);
+                }
+                else pressedForHowlong.put(k, -1); // we use this for release
+            }
+        });
+
+
         //inputs
         player.input(controller.isPressed(Keys.RIGHT),controller.isPressed(Keys.UP),
-                controller.isPressed(Keys.LEFT),controller.isPressed(Keys.DOWN), controller.isPressed(Keys.SHOOT));
+                controller.isPressed(Keys.LEFT),controller.isPressed(Keys.DOWN), justPressed(Keys.SHOOT)
+            ,justPressed(Keys.PICKUP));
+
+
+
+        if (controller.isPressed(Keys.DEBUG)) {
+            if (!isPressed) {
+                debug = !debug;
+                isPressed=true;
+            }
+        }
+        else {
+            isPressed = false;
+        }
 
         /*if (controller.isPressed(Keys.SOUND)) {
 
@@ -145,24 +192,35 @@ public class Main extends JFrame {
     public void render(Graphics2D g2d) {
 
         // Apply camera offset while drawing
+
+        drawables.sort((o1, o2) -> {
+            int result =  o2.getDrawDepth() - o1.getDrawDepth();
+
+
+            if (result == 0) {
+                return (int) (o1.y() - o2.y());
+            }
+            else return result;
+        });
+
         for (Iterator<Drawable> iterator = drawables.iterator(); iterator.hasNext(); ) {
             Drawable d = iterator.next();
 
 
             g2d.drawImage(d.getImage(),
                     (int) (d.x() - xOffset),
-                    (int) (d.y() - yOffset),
+                    (int) (d.y() - yOffset + d.z()),
                     (int) d.width(),
                     (int) d.height(),
                     null);
             if (d.toRemove()) iterator.remove();
 
-            /*//Debug code
-            if (d instanceof Thing) {
-                Collision c = ((Thing) d).getCollision();
-                g2d.drawRect(c.getX() - (int) xOffset, c.getY() - (int) yOffset , c.getWidth(), c.getHeight());
+            if (debug) {
+                if (d instanceof Thing) {
+                    Collision c = ((Thing) d).getCollision();
+                    g2d.drawRect(c.getX() - (int) xOffset, c.getY() - (int) yOffset, c.getWidth(), c.getHeight());
+                }
             }
-            */
 
         }
 

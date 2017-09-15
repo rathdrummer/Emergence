@@ -1,5 +1,6 @@
 package Normal;
 
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,12 +14,20 @@ public abstract class Thing extends Drawable{
 
     protected double x = 0;
     protected double y = 0;
+
+
+    protected int drawDepth = 0; // higher values means it is further back
+
+
     protected double dx = 0;
     protected double dy = 0;
     protected double width = 400;
     protected double height = 100;
     protected double acceleration = 1;
     protected Thing owner;
+    protected Thing heldItem = null;
+
+    protected Vector direction = new Vector(0,0);
 
     protected HashMap<AnimationType, Sprite> sprites = new HashMap<>();
     protected AnimationType currentSprite = null;
@@ -28,10 +37,11 @@ public abstract class Thing extends Drawable{
 
     protected boolean alive = false;
 
-    protected double strength = 10;
+    protected double strength = 5;
     protected double intelligence = 10;
-    protected double hp;
+
     protected double maxHP = 10;
+    protected double hp = maxHP;
     protected double armor = 0;
 
     protected double flammability = 1;
@@ -52,6 +62,53 @@ public abstract class Thing extends Drawable{
         setSprite(sprite, new AnimationType(AnimationEnum.Normal));
     }
 
+
+    public boolean getHeldItem() {
+        return heldItem != null;
+    }
+
+    public boolean pickUp(Thing thing) {
+
+        if (thing == null) return false;
+
+        if (heldItem != null) {
+            System.err.println("picking up even though it is holding");
+        }
+
+        if (thing.getWeight() < getStrength()) {
+            heldItem = thing;
+            heldItem.owner = this;
+            return true;
+        }
+        else return false;
+    }
+
+    /**
+     * Convenience function for picking up the closest object that is light enough
+     * @param things: List of things that it might pick up
+     * @return the thing it picked up, also sets that as the thing it is heldItem
+     */
+    public Thing pickUp(List<Thing> things) {
+        int reach = 15;
+        int dirX = (int) (reach * Math.signum(direction.x));
+        int dirY = (int) (reach * Math.signum(direction.y));
+
+        Collision collision = Collision.speedBox(getCollision().getX(), getCollision().getY(),
+                getCollision().getWidth(), getCollision().getHeight(), dirX, dirY);
+
+        things = collision.collidesWithThing(things, this);
+
+        things.removeIf(thing -> thing.getWeight() > getStrength());
+
+        Thing closestThing = collision.closestThing(things);
+
+        if (pickUp(closestThing)) {
+            return closestThing;
+        }
+        else return null;
+
+    }
+
     public Vector centreOnLeftCorner(){
         return new Vector(x-width/2, y-height/2);
     }
@@ -69,6 +126,7 @@ public abstract class Thing extends Drawable{
     public double y() {
         return y;
     }
+
 
     public double dx() {
         return dx;
@@ -227,10 +285,6 @@ public abstract class Thing extends Drawable{
         if (animate) {
             Sprite sprite = getSprite();
             sprite.update();
-            if (this instanceof Player) {
-                System.out.println(sprite.getImageIndex());
-            }
-
         }
 
         if (newThings == null) {
@@ -308,11 +362,21 @@ public abstract class Thing extends Drawable{
         return val;
     }
 
+    protected void releaseHeldItem() {
+        if (heldItem != null) {
+            heldItem.owner = null;
+            heldItem = null;
+        }
+    }
+
     protected void handleCollisions(List<Thing> things, boolean stopWhenHitWall, boolean applyKnockBack) {
-        Collision c = Collision.speedBox(xC(),yC(),width, height, dx, dy);
+        Collision c = Collision.speedBox(xC(),yC(),collision.getWidth(), collision.getHeight(), dx, dy);
 
 
         List<Thing> allPossibleCollisions = c.collidesWithThing(things, this);
+
+        //this prevents things from getting stuck in eachother
+        allPossibleCollisions.removeIf(other -> getCollision().collides(other));
 
         allPossibleCollisions.removeIf(thing -> this.owner == thing || this == thing.owner);
 
@@ -320,7 +384,7 @@ public abstract class Thing extends Drawable{
         int newDX = (int) dx;
         int oldSign = (int) Math.signum(dx);
 
-        c = Collision.speedBox(xC(), yC(), width, height, newDX, 0);
+        c = Collision.speedBox(xC(), yC(), collision.getWidth(), collision.getHeight(), newDX, 0);
         List<Thing> allXCollisions = c.collidesWithThing(allPossibleCollisions, this);
         if (applyKnockBack) allXCollisions.forEach(t -> t.harm(0, new Vector(dx, 0)));
         if (stopWhenHitWall && !allXCollisions.isEmpty()) {
@@ -334,7 +398,7 @@ public abstract class Thing extends Drawable{
             if (Math.signum(newDX) != oldSign) {
                 newDX = 0;
             }
-            c = Collision.speedBox(xC(),yC(),width,height, newDX, 0);
+            c = Collision.speedBox(xC(),yC(),collision.getWidth(),collision.getHeight(), newDX, 0);
             allXCollisions = c.collidesWithThing(allXCollisions, this);
         }
 
@@ -344,7 +408,7 @@ public abstract class Thing extends Drawable{
         int newDY = (int) dy;
         oldSign = (int) Math.signum(dy);
 
-        c = Collision.speedBox(xC(), yC(), width, height, 0, newDY);
+        c = Collision.speedBox(xC(), yC(), collision.getWidth(), collision.getHeight(), 0, newDY);
         List<Thing> allYCollisions = c.collidesWithThing(allPossibleCollisions, this);
         if (applyKnockBack) allYCollisions.forEach(t -> t.harm(0, new Vector(0, dy)));
 
@@ -358,14 +422,14 @@ public abstract class Thing extends Drawable{
             if (Math.signum(newDY) != oldSign) {
                 newDY = 0;
             }
-            c = Collision.speedBox(xC(),yC(),width,height, 0, newDY);
+            c = Collision.speedBox(xC(),yC(),collision.getWidth(),collision.getHeight(), 0, newDY);
             allYCollisions = c.collidesWithThing(allYCollisions, this);
         }
 
 
         y += newDY;
 
-        collision.updatePosition(xC(),yC());
+        collision.updateCenter(xC(),yC());
     }
 
     public void setOwner(Thing owner) {
@@ -378,4 +442,17 @@ public abstract class Thing extends Drawable{
         dy+=knockback.y;
     }
 
+    public void applyForce(Vector knockback){
+
+        dx+=knockback.x;
+        dy+=knockback.y;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public double getStrength() {
+        return strength;
+    }
 }

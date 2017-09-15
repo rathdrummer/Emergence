@@ -8,29 +8,31 @@ public class Stepper {
 
 
     private int y;
-    private int stepSize;
+    private int stepSizeX;
+    private int stepSizeY;
     private int x;
 
-    public Stepper(int x, int y, int stepSize) {
+    public Stepper(int x, int y, int stepSizeX, int stepSizeY) {
         this.x = x;
         this.y = y;
-        this.stepSize = stepSize;
+        this.stepSizeX = stepSizeX;
+        this.stepSizeY = stepSizeY;
     }
 
     public int right() {
-        return this.x += stepSize;
+        return this.x += stepSizeX;
     }
 
     public int left() {
-        return this.x -= stepSize;
+        return this.x -= stepSizeX;
     }
 
     public int down() {
-        return this.y += stepSize;
+        return this.y += stepSizeY;
     }
 
     public int up() {
-        return this.y -= stepSize;
+        return this.y -= stepSizeY;
     }
 
     public int getX() {

@@ -43,7 +43,7 @@ public class Projectile extends Thing{
             }
         }
 
-        getCollision().updatePosition(x,y);
+        getCollision().updateCenter(xC(),yC());
 
         return newList;
     }

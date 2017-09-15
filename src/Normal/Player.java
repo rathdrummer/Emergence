@@ -16,8 +16,11 @@ public class Player extends Thing{
     private double scaleX;
     private double scaleY;
     private boolean shoot;
-    private Vector direction = new Vector(0,0);
+
     private boolean shootIsPressed = false;
+    private boolean pickUp = false;
+    private boolean throwIt = false;
+    private boolean pickUpOrThrow =false;
 
     public Player(double x, double y){
         super(new Collision(x, y, 0, 0));
@@ -53,30 +56,33 @@ public class Player extends Thing{
         scaleY = 1;
         height = getImage().getHeight(null);
         width = getImage().getWidth(null);
-        collision.updateSize(width,height, true);
-        collision.updatePosition(xC(), yC());
+        collision.updateSize(width*0.3,height*.25, true);
+        collision.updateCenter(xC(), yC());
     }
 
 
-    public void input(boolean right, boolean up, boolean left, boolean down, boolean shoot) {
+    public void input(boolean right, boolean up, boolean left, boolean down, boolean shootPressed, boolean pickUpPressed) {
         if (right) incrementDX(true);
         if (up) incrementDY(false);
         if (left) incrementDX(false);
         if (down) incrementDY(true);
 
-        this.shoot = false;
-        if (shoot) {
-            if (!this.shootIsPressed){
-                this.shootIsPressed = true;
-                this.shoot = true;
-            }
+        this.pickUpOrThrow = pickUpPressed;
 
-        }
-        else {
-            this.shootIsPressed = false;
-        }
+        this.shoot = shootPressed;
+
     }
 
+    @Override
+    public double xC() {
+        return super.xC() - 2;
+    }
+
+    //centering sprite and collision on feet
+    @Override
+    public double yC() {
+        return y + (height * .65);
+    }
 
     @Override
     public List<Drawable> update(List<Thing> things){
@@ -138,17 +144,28 @@ public class Player extends Thing{
 
         ArrayList<Drawable> newThings = new ArrayList<>();
 
-        Projectile orb = new Projectile(xC(), yC(),new Sprite("orb"), direction.getAngle(),10);
-        orb.setPosition(orb.centreOnLeftCorner());
-        orb.setOwner(this);
 
         if (shoot){
+            Projectile orb = new Projectile(xC(), yC(),new Sprite("orb"), direction.getAngle(),10);
+            orb.setPosition(orb.centreOnLeftCorner());
+            orb.setOwner(this);
             newThings.add(orb);
+        }
+
+        if (pickUpOrThrow) {
+            if (heldItem == null) pickUp(things);
+            else {
+                throwIt();
+            }
         }
 
         return newThings;
     }
 
+    private void throwIt() {
+        heldItem.applyForce(Vector.getComponents(8, direction.getAngle()));
+        releaseHeldItem();
+    }
 
 
     public void incrementX(boolean direction){

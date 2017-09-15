@@ -34,6 +34,10 @@ public class Collision {
         return collision;
     }
 
+    public static Collision Copy(Collision collision) {
+        return new Collision(collision.x, collision.y, collision.width, collision.height);
+    }
+
     public Collision(int xCenter, int yCenter, int width, int height) {
         this.x = xCenter - width/2;
         this.y = yCenter - height/2;
@@ -50,6 +54,8 @@ public class Collision {
 
         if (other == this) return false;
 
+        if (width == 0 || height == 0 || other.width == 0 || other.height == 0) return false;
+
         boolean xOverlap = (Math.max(x + width, other.x + other.width) - Math.min(x, other.x) < width + other.width);
         boolean yOverlap = (Math.max(y + height, other.y + other.height) - Math.min(y, other.y) < height + other.height);
 
@@ -57,6 +63,9 @@ public class Collision {
     }
 
     public boolean collides (Thing thing) {
+        if (thing == null) {
+            return false;
+        }
 
         return this.collides(thing.getCollision());
 
@@ -213,7 +222,7 @@ public class Collision {
         return Math.sqrt( Math.pow(c.x - x, 2) + Math.pow(c.y - y, 2) );
     }
 
-    public void updatePosition(double xCenter, double yCenter) {
+    public void updateCenter(double xCenter, double yCenter) {
         this.x = (int) xCenter - width / 2;
         this.y = (int) yCenter - height / 2;
     }

@@ -15,6 +15,7 @@ public class Tile extends Drawable {
 
     public Tile(String fileName, int x, int y, int width, int height, int row, int column) {
         initTile(fileName, x, y, width, height, row, column);
+
     }
 
     public Tile(String fileName, int x, int y, int width, int height, int nr) {
@@ -34,6 +35,8 @@ public class Tile extends Drawable {
         this.y = y;
         this.width = (double) width;
         this.height = (double) height;
+
+        setDrawDepth(100); //way back
     }
 
 

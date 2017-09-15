@@ -23,7 +23,13 @@ public class Blob extends Thing{
         this.frictionAcc = 0.02;
         this.maxSpeed = 9;
 
-        collision.updatePosition(xC(), yC());
+        collision.updateCenter(xC(), yC());
+        collision.updateSize(width*.65, height*.25, true);
+    }
+
+    @Override
+    public double yC() {
+        return y + (height * 0.7);
     }
 
     @Override

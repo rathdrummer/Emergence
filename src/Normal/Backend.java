@@ -46,6 +46,10 @@ public class Backend extends JPanel implements ActionListener, MouseListener {
     }
 
 
+    public Map<Keys, Boolean> getKeys() {
+        return commandIsPressedTable;
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -106,11 +110,13 @@ public class Backend extends JPanel implements ActionListener, MouseListener {
      * Run to add all the keys to the hashtables.
      */
     private void initKeys(){
-        addKey(38,Keys.UP);
-        addKey(37,Keys.LEFT);
-        addKey(40,Keys.DOWN);
-        addKey(39,Keys.RIGHT);
-        addKey(32,Keys.SHOOT);
+        addKey(38,Keys.UP);         //up
+        addKey(37,Keys.LEFT);       //left
+        addKey(40,Keys.DOWN);       //down
+        addKey(39,Keys.RIGHT);      //right
+        addKey(32,Keys.SHOOT);      //space
+        addKey(68,Keys.DEBUG);      //d
+        addKey(90, Keys.PICKUP);    //z
     }
 
     /**

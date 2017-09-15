@@ -5,17 +5,38 @@ import java.awt.*;
 public abstract class Drawable {
 
 
-    public double x;
-    public double y;
-    public double width;
-    public double height;
-    public Image image;
+    protected double x;
+    protected double y;
+    protected double z = 0;
+    protected double width;
+    protected double height;
+    protected Image image;
+    private int drawDepth = 0;
 
     boolean remove; // false by default!
 
 
     public double x(){return x;}
     public double y() {return y;}
+    public double z() {return z;}
+
+
+
+    public void setDrawDepth(int drawDepth) {
+        this.drawDepth = drawDepth;
+    }
+
+    public int getDrawDepth() {
+        return drawDepth;
+    }
+
+    public void setDrawDepthBehind(Thing thing) {
+        this.drawDepth = thing.drawDepth + 1;
+    }
+
+    public void setDrawDepthInFrontOf(Thing thing) {
+        this.drawDepth = thing.drawDepth - 1;
+    }
 
     public boolean toRemove() {return remove;}
 
