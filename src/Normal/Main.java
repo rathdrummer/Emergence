@@ -203,9 +203,24 @@ public class Main extends JFrame {
             else return result;
         });
 
+
+
         for (Iterator<Drawable> iterator = drawables.iterator(); iterator.hasNext(); ) {
             Drawable d = iterator.next();
 
+            if (d instanceof Thing){ //shadow code
+                Thing t = (Thing) d;
+                Collision c = t.getCollision();
+
+
+
+                if (t.z() < 0) {
+
+                    Color shadowColor = new Color(0,0,0,100);
+                    g2d.setColor(shadowColor);
+                    g2d.fillOval((int) (c.getX() - xOffset),(int) (c.getY() -  yOffset), c.getWidth(), c.getHeight());
+                }
+            }
 
             g2d.drawImage(d.getImage(),
                     (int) (d.x() - xOffset),

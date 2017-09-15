@@ -164,6 +164,7 @@ public class Player extends Thing{
 
     private void throwIt() {
         heldItem.applyForce(Vector.getComponents(8, direction.getAngle()));
+
         releaseHeldItem();
     }
 
