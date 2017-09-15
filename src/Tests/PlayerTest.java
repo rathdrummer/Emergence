@@ -1,10 +1,8 @@
 package Tests;
 
-import Normal.Library;
+
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.awt.image.BufferedImage;
 
 import Normal.Player;
 
