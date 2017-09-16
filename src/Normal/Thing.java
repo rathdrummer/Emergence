@@ -48,6 +48,7 @@ public abstract class Thing extends Drawable{
     protected double frictionAcc=0.5;
     protected double maxSpeed=7;
     private boolean animate = true;
+    private boolean solid = false;
 
     public Thing(Sprite sprite, Vector vector){
         this(sprite, vector.x, vector.y);
@@ -109,7 +110,7 @@ public abstract class Thing extends Drawable{
 
     }
 
-    public Vector centreOnLeftCorner(){
+    public Vector centerOnLeftCorner(){
         return new Vector(x-width/2, y-height/2);
     }
 
@@ -311,6 +312,10 @@ public abstract class Thing extends Drawable{
         animate = false;
     }
 
+    protected void resetAnimation() {
+        getSprite().setImageIndex(0);
+    }
+
     protected void playAnimation() {
         animate = true;
     }
@@ -367,6 +372,31 @@ public abstract class Thing extends Drawable{
             heldItem.owner = null;
             heldItem = null;
         }
+    }
+
+    /**
+     * Use this to access if a thing can see another thing
+     * @param things: list o relevant collisions (can include target collision and own collision)
+     * @param me: the thing accessing if it can see
+     * @param aim: the target in question
+     * @param maxLength: how far away to look (numbers below 0 counts as infinite vision)
+     * @return: if it can see
+     */
+    protected boolean canSee(List<Thing> things, Thing me,  Thing aim, int maxLength) {
+
+        CollisionLine sight = new CollisionLine(me.xC(),me.yC(), aim.xC(), aim.yC(), me);
+
+
+        if (maxLength >= 0) {
+            if (maxLength < sight.getLength()) {
+                return false;
+            }
+        }
+
+        sight.addToIgnore(aim);
+
+        //if the collision line collides, we cannot see the player
+        return !sight.collides(things);
     }
 
     protected void handleCollisions(List<Thing> things, boolean stopWhenHitWall, boolean applyKnockBack) {
@@ -454,5 +484,15 @@ public abstract class Thing extends Drawable{
 
     public double getStrength() {
         return strength;
+    }
+
+    public boolean isSolid() {
+        return solid;
+    }
+
+    public void resetSpeed() {
+        dx = 0;
+        dy = 0;
+        System.out.println("resest speed");
     }
 }

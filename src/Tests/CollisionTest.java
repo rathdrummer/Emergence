@@ -1,6 +1,7 @@
 package Tests;
 
 import Normal.Collision;
+import Normal.CollisionLine;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -136,6 +137,17 @@ public class CollisionTest {
         Collision second = new Collision(3, 4, 30, 30);
 
         Assert.assertTrue(first.distance(second) == 5);
+    }
+
+    @Test
+    public void collisionLine() {
+        Collision box = new Collision(25,25,50,50); // upper left is 0, 0 bottom right is 50, 50
+
+        CollisionLine hit = new CollisionLine(-10, -10, 60, 60);
+        CollisionLine miss = new CollisionLine(-10, -10, 60, -60);
+
+        Assert.assertTrue(hit.collides(box));
+        Assert.assertFalse(miss.collides(box));
     }
 
 }

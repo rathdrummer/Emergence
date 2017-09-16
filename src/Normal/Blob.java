@@ -12,7 +12,8 @@ public class Blob extends Thing{
 
     public Blob(double x, double y) {
         super(new Collision(x, y, 50,50));
-        setSprite(new Sprite("blobAnimation", 50), new AnimationType(AnimationEnum.Normal));
+        Sprite spr = new Sprite("blobAnimation", 50,50);
+        setSprite(spr, new AnimationType(AnimationEnum.Normal));
         this.x = x;
         this.y = y;
         collision.updateSize(getImage().getWidth(null),getImage().getHeight(null), false);
@@ -38,6 +39,7 @@ public class Blob extends Thing{
             if (t instanceof Player){
                 xGoal = t.xC();
                 yGoal = t.yC();
+                break;
             }
         }
 

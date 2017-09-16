@@ -72,7 +72,7 @@ public class Bush extends Thing {
             }
         }
 
-        System.out.println(z);
+
         x+=dx;
         y+=dy;
         collision.updateCenter(xC(), yC());

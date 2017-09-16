@@ -147,7 +147,7 @@ public class Player extends Thing{
 
         if (shoot){
             Projectile orb = new Projectile(xC(), yC(),new Sprite("orb"), direction.getAngle(),10);
-            orb.setPosition(orb.centreOnLeftCorner());
+            orb.setPosition(orb.centerOnLeftCorner());
             orb.setOwner(this);
             newThings.add(orb);
         }
@@ -163,6 +163,7 @@ public class Player extends Thing{
     }
 
     private void throwIt() {
+        heldItem.resetSpeed(); // TODO: do not like this solution, somehow the bush gets to much speed
         heldItem.applyForce(Vector.getComponents(8, direction.getAngle()));
 
         releaseHeldItem();

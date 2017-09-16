@@ -3,7 +3,6 @@ package Normal;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.util.*;
 import java.util.List;
 
@@ -20,7 +19,9 @@ public class Main extends JFrame {
 
 
     // Stack of all the drawable objects to be shown on screen, in order.
-    public LinkedList<Drawable> drawables = new LinkedList<>();
+    public LinkedList<Drawable> drawables = new LinkedList<>(); // should be some sort of synchronized list
+
+
 
     // Camera offset - lets the camera follow the player or anything else
     private double xOffset = 0;
@@ -33,7 +34,7 @@ public class Main extends JFrame {
     */
 
     public Main(){
-        player = new Player(100, 200);
+        player = new Player(400, 600);
         cam = new Camera(player);
 
         for (int i = 0; i < 256; i++) {
@@ -46,32 +47,36 @@ public class Main extends JFrame {
             }
         }
 
+
         Stepper stepper = new Stepper(200, 200, 45, 30);
-        addThing(new Box(stepper.getX(), stepper.getY()));
-        addThing(new Box(stepper.getX(), stepper.down()));
-        addThing(new Box(stepper.getX(), stepper.down()));
-        addThing(new Box(stepper.getX(), stepper.down()));
-        addThing(new Box(stepper.right(), stepper.getY()));
-        addThing(new Box(stepper.right(), stepper.getY()));
-        addThing(new Box(stepper.right(), stepper.getY()));
-        addThing(new Box(stepper.right(), stepper.getY()));
-        addThing(new Box(stepper.getX(), stepper.up()));
-        addThing(new Box(stepper.getX(), stepper.up()));
-        addThing(new Box(stepper.getX(), stepper.up()));
-        addThing(new Box(stepper.getX(), stepper.up()));
-        addThing(new Box(stepper.right(), stepper.getY()));
-        addThing(new Box(stepper.right(), stepper.getY()));
-        addThing(new Box(stepper.right(), stepper.getY()));
-        addThing(new Box(stepper.right(), stepper.getY()));
+        addThing(new Stub(stepper.getX(), stepper.getY()));
+        addThing(new Stub(stepper.getX(), stepper.down()));
+        addThing(new Stub(stepper.getX(), stepper.down()));
+        addThing(new Stub(stepper.getX(), stepper.down()));
+        addThing(new Stub(stepper.right(), stepper.getY()));
+        addThing(new Stub(stepper.right(), stepper.getY()));
+        addThing(new Stub(stepper.right(), stepper.getY()));
+        addThing(new Stub(stepper.right(), stepper.getY()));
+        addThing(new Stub(stepper.getX(), stepper.up()));
+        addThing(new Stub(stepper.getX(), stepper.up()));
+        addThing(new Stub(stepper.getX(), stepper.up()));
+        addThing(new Stub(stepper.getX(), stepper.up()));
+        addThing(new Stub(stepper.right(), stepper.getY()));
+        addThing(new Stub(stepper.right(), stepper.getY()));
+        addThing(new Stub(stepper.right(), stepper.getY()));
+        addThing(new Stub(stepper.right(), stepper.getY()));
 
         addThing(new Bush(stepper.right(), stepper.down()));
 
 
         addThing(player);
-        addThing(new Blob(100,100));
-        addThing(new Blob(150,100));
-        addThing(new Blob(100,150));
-        addThing(new Blob(300,500));
+
+        addThing(new Baddy(100,100));
+        addThing(new Baddy(150,100));
+        addThing(new Baddy(100,150));
+        addThing(new Baddy(300,500));
+
+        addThing(new Baddy(400,500));
 
 
         //creating two listener that calls our update and render functions and sending them to the controller
@@ -193,9 +198,8 @@ public class Main extends JFrame {
 
         // Apply camera offset while drawing
 
-        drawables.sort((o1, o2) -> {
+        drawables.sort((o1, o2) -> { // Comparison method violates its general contract
             int result =  o2.getDrawDepth() - o1.getDrawDepth();
-
 
             if (result == 0) {
                 return (int) (o1.y() - o2.y());
@@ -203,16 +207,12 @@ public class Main extends JFrame {
             else return result;
         });
 
-
-
         for (Iterator<Drawable> iterator = drawables.iterator(); iterator.hasNext(); ) {
             Drawable d = iterator.next();
 
             if (d instanceof Thing){ //shadow code
                 Thing t = (Thing) d;
                 Collision c = t.getCollision();
-
-
 
                 if (t.z() < 0) {
 
@@ -228,6 +228,7 @@ public class Main extends JFrame {
                     (int) d.width(),
                     (int) d.height(),
                     null);
+
             if (d.toRemove()) iterator.remove();
 
             if (debug) {
