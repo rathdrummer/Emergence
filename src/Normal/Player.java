@@ -12,14 +12,7 @@ public class Player extends Thing{
 
     private double acceleration;
     private double maxSpeed;
-
-    private double scaleX;
-    private double scaleY;
     private boolean shoot;
-
-    private boolean shootIsPressed = false;
-    private boolean pickUp = false;
-    private boolean throwIt = false;
     private boolean pickUpOrThrow =false;
 
     public Player(double x, double y){
@@ -27,7 +20,9 @@ public class Player extends Thing{
 
         /*add sprites to player*/
 
-        //only on image, so we split it up after we load it into one sprite
+        //here is how you would load and then tint a sprite
+        //BufferedImage image = Library.opacity(Library.loadImage("person"), .5);
+
         Sprite all = new Sprite("person", 50, 50);
         all.setImageSpeed(.25); // this image speed will be set for those who take parts of it
 
@@ -52,8 +47,6 @@ public class Player extends Thing{
         dy = 0;
         acceleration = 1;
         maxSpeed = 7;
-        scaleX = 1;
-        scaleY = 1;
         height = getImage().getHeight(null);
         width = getImage().getWidth(null);
         collision.updateSize(width*0.3,height*.25, true);
@@ -87,10 +80,12 @@ public class Player extends Thing{
     @Override
     public List<Drawable> update(List<Thing> things){
 
-        double range = 0.1;
 
-        scaleX = (1 - range/2) + range * ( (Math.abs(dx)/maxSpeed) - (Math.abs(dy)/maxSpeed) );
-        scaleY = (1 - range/2) + range * ( (Math.abs(dy)/maxSpeed) - (Math.abs(dx)/maxSpeed) );
+
+        //squish and stretch
+        //double range = 0.1;
+        //scaleX = (1 - range/2) + range * ( (Math.abs(dx)/maxSpeed) - (Math.abs(dy)/maxSpeed) );
+        //scaleY = (1 - range/2) + range * ( (Math.abs(dy)/maxSpeed) - (Math.abs(dx)/maxSpeed) );
 
         AnimationEnum walk = AnimationEnum.Walk;
 
@@ -107,9 +102,9 @@ public class Player extends Thing{
                 stopAnimation = false;
 
                 if (dx > 0) {
-                    changeSpriteTo(new AnimationType(walk, DirectionEnum.Right));
+                    changeSpriteTo(new AnimationType(walk, DirectionEnum.Right), true);
                 }else {
-                    changeSpriteTo(new AnimationType(walk, DirectionEnum.Left));
+                    changeSpriteTo(new AnimationType(walk, DirectionEnum.Left), true);
                 }
             }
         } else {
@@ -118,9 +113,9 @@ public class Player extends Thing{
                 stopAnimation = false;
 
                 if (dy > 0) {
-                    changeSpriteTo(new AnimationType(walk, DirectionEnum.Down));
+                    changeSpriteTo(new AnimationType(walk, DirectionEnum.Down), true);
                 }else {
-                    changeSpriteTo(new AnimationType(walk, DirectionEnum.Up));
+                    changeSpriteTo(new AnimationType(walk, DirectionEnum.Up), true);
                 }
             }
         }

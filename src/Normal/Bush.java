@@ -13,8 +13,6 @@ public class Bush extends Thing {
     private final double normalFriction = 8;
     private final double throwFriction = .4;
 
-    private double dz = 0;
-    private double gravity = .25;
 
     public Bush(int x, int y) {
         super(new Collision(x, y, 0, 0));
@@ -57,14 +55,7 @@ public class Bush extends Thing {
             updateSpeed();
             handleCollisions(things, true, true);
 
-            if (z < 0) {
-                dz += gravity;
-                z += dz;
-            }
-            else  {
-                dz = 0;
-                z = 0;
-            }
+            zGrav();
 
 
             if (z == 0) {
@@ -78,6 +69,8 @@ public class Bush extends Thing {
         collision.updateCenter(xC(), yC());
         return null;
     }
+
+
 
     @Override
     public double yC() {

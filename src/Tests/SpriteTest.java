@@ -27,4 +27,14 @@ public class SpriteTest {
         Assert.assertTrue(down.getImageIndex() == 1);
     }
 
+    @Test
+    public void isItReversing() {
+        Sprite spr = new Sprite("baddyDissappear", 50, 50);
+        Sprite clone = spr.clone();
+        clone.reverse();
+
+        Assert.assertFalse(spr.getImage(0) == clone.getImage(0));
+        Assert.assertTrue(spr.getImage(0) == clone.getImage(clone.length()-1));
+    }
+
 }

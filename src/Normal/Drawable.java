@@ -13,6 +13,9 @@ public abstract class Drawable {
     protected Image image;
     private int drawDepth = 0;
 
+
+    protected boolean invisible = false;
+
     boolean remove; // false by default!
 
 
@@ -21,6 +24,10 @@ public abstract class Drawable {
     public double z() {return z;}
 
 
+
+    public boolean isInvisible() {
+        return invisible;
+    }
 
     public void setDrawDepth(int drawDepth) {
         this.drawDepth = drawDepth;

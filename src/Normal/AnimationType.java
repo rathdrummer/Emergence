@@ -8,6 +8,7 @@ import org.junit.Assert;
  * This classes has some inputs and outputs
  */
 public class AnimationType {
+
     private final AnimationEnum ae;
     private final DirectionEnum de;
 

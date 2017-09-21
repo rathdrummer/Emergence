@@ -1,6 +1,5 @@
 package Normal;
 
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,8 +11,10 @@ import java.awt.*;
  */
 public abstract class Thing extends Drawable{
 
-    protected double x = 0;
-    protected double y = 0;
+    //x, y and z is in drawable
+
+    protected double dz = 0;
+    protected double gravity = .25;
 
 
     protected int drawDepth = 0; // higher values means it is further back
@@ -35,7 +36,7 @@ public abstract class Thing extends Drawable{
 
     protected double weight = 10;
 
-    protected boolean alive = false;
+    protected boolean alive = true;
 
     protected double strength = 5;
     protected double intelligence = 10;
@@ -62,6 +63,8 @@ public abstract class Thing extends Drawable{
         collision = new Collision(x,y,width,height);
         setSprite(sprite, new AnimationType(AnimationEnum.Normal));
     }
+
+
 
 
     public boolean getHeldItem() {
@@ -94,14 +97,13 @@ public abstract class Thing extends Drawable{
         int dirX = (int) (reach * Math.signum(direction.x));
         int dirY = (int) (reach * Math.signum(direction.y));
 
-        Collision collision = Collision.speedBox(getCollision().getX(), getCollision().getY(),
-                getCollision().getWidth(), getCollision().getHeight(), dirX, dirY);
+        Collision collision = getCollision().asSpeedBox(dirX, dirY);
 
-        things = collision.collidesWithThing(things, this);
+        List<Thing> pickUpThings = collision.collidesWithThing(things, this);
 
-        things.removeIf(thing -> thing.getWeight() > getStrength());
+        pickUpThings.removeIf(thing -> thing.getWeight() > getStrength());
 
-        Thing closestThing = collision.closestThing(things);
+        Thing closestThing = collision.closestThing(pickUpThings);
 
         if (pickUp(closestThing)) {
             return closestThing;
@@ -245,20 +247,25 @@ public abstract class Thing extends Drawable{
     /**
      * Use this to switch between animations
      * @param animationType
+     * @param playFromStart
      * @return
      */
-    public boolean changeSpriteTo(AnimationType animationType) {
+    public boolean changeSpriteTo(AnimationType animationType, boolean playFromStart) {
         if (animationType.equals(currentSprite)) {
             return true;
         }
-        return changeSpriteTo(animationType, 0);
+
+        int index = 0;
+        if (!playFromStart) index = -1;
+        return changeSpriteTo(animationType, -1);
     }
 
     private boolean changeSpriteTo(AnimationType animationType, int index) {
         Sprite spr = sprites.get(animationType);
         if (spr != null) {
             currentSprite = animationType;
-            spr.setImageIndex(index);
+            if (index != -1) spr.setImageIndex(index);
+
             return true;
         }
         else {
@@ -280,7 +287,7 @@ public abstract class Thing extends Drawable{
         Wrapper for the update so we do not have to write duplicate code,
         Here we put code that all "Things" should run, like update their sprite and such.
     */
-    public final List<Drawable> tick(List<Thing> things) {
+    public final List<Drawable> tick(final List<Thing> things) {
         List<Drawable> newThings = update(things);
 
         if (animate) {
@@ -416,7 +423,7 @@ public abstract class Thing extends Drawable{
 
         c = Collision.speedBox(xC(), yC(), collision.getWidth(), collision.getHeight(), newDX, 0);
         List<Thing> allXCollisions = c.collidesWithThing(allPossibleCollisions, this);
-        if (applyKnockBack) allXCollisions.forEach(t -> t.harm(0, new Vector(dx, 0)));
+        if (applyKnockBack) allXCollisions.forEach(t -> t.applyForce(new Vector(dx, 0)));
         if (stopWhenHitWall && !allXCollisions.isEmpty()) {
             dx = 0;
             newDX = 0;
@@ -494,5 +501,16 @@ public abstract class Thing extends Drawable{
         dx = 0;
         dy = 0;
         System.out.println("resest speed");
+    }
+
+    protected void zGrav() {
+        if (z < 0) {
+            dz += gravity;
+            z += dz;
+        }
+        else  {
+            dz = 0;
+            z = 0;
+        }
     }
 }

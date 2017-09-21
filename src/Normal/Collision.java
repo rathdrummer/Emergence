@@ -34,8 +34,21 @@ public class Collision {
         return collision;
     }
 
-    public static Collision Copy(Collision collision) {
-        return new Collision(collision.x, collision.y, collision.width, collision.height);
+    public Collision asSpeedBox(double dx, double dy) {
+        Collision speedBox = this.clone();
+
+        double transX = (dx > 0) ? 0 : dx;
+        double transY = (dy > 0) ? 0 : dy;
+
+
+        speedBox.updateTopLeft(x + transX, y + transY);
+        speedBox.updateSize(width + Math.abs(dx), height + Math.abs(dy), false);
+
+        return speedBox;
+    }
+
+    public Collision clone() {
+        return new Collision(this.x, this.y, this.width, this.height);
     }
 
     public Collision(int xCenter, int yCenter, int width, int height) {
@@ -220,6 +233,11 @@ public class Collision {
 
     public double distance(Collision c) {
         return Math.sqrt( Math.pow(c.x - x, 2) + Math.pow(c.y - y, 2) );
+    }
+
+    private void updateTopLeft(double x, double y) {
+        this.x = (int) x;
+        this.y = (int) y;
     }
 
     public void updateCenter(double xCenter, double yCenter) {

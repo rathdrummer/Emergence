@@ -39,7 +39,7 @@ public class Library {
 
         BufferedImage find = savedImages.get(res);
         if (find != null) {
-            img =  copyImage(find);
+            img =  cloneImage(find);
         } else {
             try {
                 if (!res.isValid()) throw new IOException();
@@ -53,7 +53,10 @@ public class Library {
         return img;
     }
 
-    static BufferedImage copyImage(BufferedImage bi) {
+
+
+    static BufferedImage cloneImage(BufferedImage bi) {
+
         ColorModel cm = bi.getColorModel();
         boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
         WritableRaster raster = bi.copyData(null);
@@ -133,7 +136,6 @@ public class Library {
     }
 
     /**
-     * Quick way to tint a sprite or make it transparent (use Color.white to not affect the color (I think))
      * @param img: The image to tint
      * @param color: the color you want
      * @param alpha: the transparency you want
@@ -147,6 +149,50 @@ public class Library {
         return tint(img, r, g, b, a);
     }
 
+    public static BufferedImage opacity(BufferedImage img, double a) {
+        return opacity(img, (float) a);
+    }
+
+    /**
+     * Return a colorized version of the sprite
+     * @param img, the image to colorize
+     * @param r: 0-255. Red value
+     * @param g: 0-255. Green value
+     * @param b: 0-255. Blue Value
+     * @param a: 0.0-1.0 the alpha of the new sprite, 0 is invisble, 1 is opaque
+     * @return A new image tintet the color
+     */
+    public static BufferedImage opacity(BufferedImage img, float a) {
+
+        if (a > 1) {
+            System.err.println("alpha to big!! (supposed to be 0-1), dividing by 255");
+            a /= 255;
+        }
+
+        BufferedImage tintedImage = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TRANSLUCENT);
+        Graphics2D graphics = tintedImage.createGraphics();
+        graphics.drawImage(img, 0, 0, null);
+        graphics.dispose();
+
+        for (int i = 0; i < tintedImage.getWidth(); i++) {
+            for (int j = 0; j < tintedImage.getHeight(); j++) {
+                int ax = tintedImage.getColorModel().getAlpha(tintedImage.getRaster().
+                        getDataElements(i, j, null));
+                int rx = tintedImage.getColorModel().getRed(tintedImage.getRaster().
+                        getDataElements(i, j, null));
+                int gx = tintedImage.getColorModel().getGreen(tintedImage.getRaster().
+                        getDataElements(i, j, null));
+                int bx = tintedImage.getColorModel().getBlue(tintedImage.getRaster().
+                        getDataElements(i, j, null));
+
+                ax *= a;
+                tintedImage.setRGB(i, j, (ax << 24) | (rx << 16) | (gx << 8) | (bx));
+            }
+        }
+        return tintedImage;
+    }
+
+
     /**
      * Return a colorized version of the sprite
      * @param img, the image to colorize
@@ -157,6 +203,12 @@ public class Library {
      * @return A new image tintet the color
      */
     public static BufferedImage tint(BufferedImage img, float r, float g, float b, float a) {
+
+        if (a > 1) {
+            System.err.println("alpha to big!! (supposed to be 0-1), dividing by 255");
+            a /= 255;
+        }
+
         BufferedImage tintedImage = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TRANSLUCENT);
         Graphics2D graphics = tintedImage.createGraphics();
         graphics.drawImage(img, 0, 0, null);

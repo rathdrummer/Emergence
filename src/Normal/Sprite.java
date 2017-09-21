@@ -1,11 +1,8 @@
 package Normal;
 
-import org.junit.Assert;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
-import java.util.IntSummaryStatistics;
 
 
 /**
@@ -14,10 +11,13 @@ import java.util.IntSummaryStatistics;
  */
 public class Sprite {
 
+    public static final int AT_LOOP = -1;
     private BufferedImage[] img;
     private double imageSpeed = .1;
     private double imageIndex = 0;
     private boolean looped;
+
+    private HashMap<Integer, GenericListener> doOnFrame = new HashMap<>();
 
     public Sprite(String imagePath) {
         img = new BufferedImage[1];
@@ -31,6 +31,22 @@ public class Sprite {
 
     public Sprite(String imagePath, int width) {
         img = Library.loadSprite(imagePath, width);
+    }
+
+    //does not clone framelisteners!!!
+    public Sprite clone() {
+        Sprite spr = new Sprite(img.clone());
+        spr.setImageSpeed(imageSpeed);
+        return spr;
+    }
+
+    public void reverse() {
+        BufferedImage[] reversed = new BufferedImage[img.length];
+
+        for (int i = 0; i < img.length; i++) {
+            reversed[i] = img[img.length - 1 - i];        }
+
+        img = reversed;
     }
 
 
@@ -64,6 +80,7 @@ public class Sprite {
 
     public void setImageIndex(int index) {
         imageIndex = index;
+        if (imageIndex == 0) looped = false; // we do not looped if we set the image index
     }
 
     public int getImageIndex() {
@@ -75,6 +92,7 @@ public class Sprite {
     }
 
     public void update() {
+
         boolean nowLoop = false;
         if (imageSpeed != 0 && img.length > 1) {
             imageIndex += imageSpeed;
@@ -94,6 +112,22 @@ public class Sprite {
 
         looped = nowLoop;
         if (imageIndex < 0 || imageIndex >= img.length) throw new AssertionError();
+
+        if (looped()) {
+            //if we are on a new loop
+            GenericListener fl = doOnFrame.get(Sprite.AT_LOOP);
+            if (fl != null) {
+                fl.action();
+            }
+        }
+
+        GenericListener fl = doOnFrame.get(getImageIndex());
+        if (fl != null) {
+            fl.action();
+        }
+
+
+
     }
 
     public int getWidth() {
@@ -108,6 +142,13 @@ public class Sprite {
         return img[(int) imageIndex];
     }
 
+    public Image getImage(double imageIndex) {
+        return img[(int) imageIndex];
+    }
+
+    public int length() {
+        return img.length;
+    }
 
     public Sprite getPartOf(int startFrame, int nrOfFrames) {
 
@@ -125,5 +166,9 @@ public class Sprite {
 
     public double getImageSpeed() {
         return imageSpeed;
+    }
+
+    public void setFrameListenerOn(int imageIndex, GenericListener fl) {
+        doOnFrame.put(imageIndex, fl);
     }
 }

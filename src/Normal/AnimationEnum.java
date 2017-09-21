@@ -5,5 +5,5 @@ package Normal;
  * This classes has some inputs and outputs
  */
 public enum AnimationEnum {
-    Normal, Walk, Run, Throw; //add as many as you want
+    Normal, Walk, Run, Throw, Dissappear, Appear, Dead; //add as many as you want
 }

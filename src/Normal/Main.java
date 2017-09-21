@@ -19,7 +19,7 @@ public class Main extends JFrame {
 
 
     // Stack of all the drawable objects to be shown on screen, in order.
-    public LinkedList<Drawable> drawables = new LinkedList<>(); // should be some sort of synchronized list
+    public List<Drawable> drawables = Collections.synchronizedList(new LinkedList<Drawable>()); // synchronized
 
 
 
@@ -34,6 +34,21 @@ public class Main extends JFrame {
     */
 
     public Main(){
+        init();
+
+        //creating two listener that calls our update and render functions and sending them to the controller
+        this.controller = new Backend(e -> update(), this::render);
+        initUI();
+
+        clip = null;
+        /**
+        clip = Sound.playMusic("forest-flute");
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+        Sound.playMusic("forest-strings").loop(Clip.LOOP_CONTINUOUSLY);
+         */
+    }
+
+    private void init() {
         player = new Player(400, 600);
         cam = new Camera(player);
 
@@ -41,12 +56,15 @@ public class Main extends JFrame {
             int column = i % 16;
             int row = i / 16;
 
-            addThing(new Tile("tiles", 50 * column, 50 * row, 50, 50, 2));
+            addThing(new Tile("tiles", 50 * column, 50 * row, 50, 50, 1, 1));
+
+            //addThing(new Tile("tiles", 50 * row, 50 * column, 50, 50, 1, 3)); //looks really ugly now
+
             if (Math.random() < 0.15) {
-                addThing(new Tile("tiles", 50 * column, 50 * row, 50, 50, 4 + (int) Math.round(3 * Math.random())));
+                //addThing(new Tile("tiles", 50 * column, 50 * row, 50, 50, 4 + (int) Math.round(3 * Math.random())));
+                addThing(new Tile("tiles", 50 * column, 50 * row, 50, 50, 2, 0));
             }
         }
-
 
         Stepper stepper = new Stepper(200, 200, 45, 30);
         addThing(new Stub(stepper.getX(), stepper.getY()));
@@ -78,17 +96,6 @@ public class Main extends JFrame {
 
         addThing(new Baddy(400,500));
 
-
-        //creating two listener that calls our update and render functions and sending them to the controller
-        this.controller = new Backend(e -> update(), this::render);
-        initUI();
-
-        clip = null;
-        /**
-        clip = Sound.playMusic("forest-flute");
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
-        Sound.playMusic("forest-strings").loop(Clip.LOOP_CONTINUOUSLY);
-         */
     }
 
     private void initUI() {
@@ -113,6 +120,7 @@ public class Main extends JFrame {
     public void update() {
 
 
+        //press and release functionality
         controller.getKeys().forEach((k,isPressed) -> {
 
             Integer key = pressedForHowlong.get(k);
@@ -132,6 +140,10 @@ public class Main extends JFrame {
                 else pressedForHowlong.put(k, -1); // we use this for release
             }
         });
+
+        if (justPressed(Keys.RESTART)) {
+            restart();
+        }
 
 
         //inputs
@@ -190,6 +202,12 @@ public class Main extends JFrame {
         updateOffset(cam.x()-this.getContentPane().getWidth()/2,cam.y()-this.getContentPane().getHeight()/2); // Follow the player
     }
 
+    private void restart() {
+        things.clear();
+        drawables.clear();
+        init();
+    }
+
     public void run() {
         controller.run();
     }
@@ -198,14 +216,16 @@ public class Main extends JFrame {
 
         // Apply camera offset while drawing
 
-        drawables.sort((o1, o2) -> { // Comparison method violates its general contract
-            int result =  o2.getDrawDepth() - o1.getDrawDepth();
-
-            if (result == 0) {
-                return (int) (o1.y() - o2.y());
-            }
-            else return result;
-        });
+        try {
+            drawables.sort((o1, o2) -> { // Comparison method violates its general contract
+                int result = o2.getDrawDepth() - o1.getDrawDepth();
+                if (result == 0) {
+                    return (int) (o1.yC() - o2.yC());
+                } else return result;
+            });
+        } catch (IllegalArgumentException e) {
+            System.err.println("Desynchronization problem");
+        }
 
         for (Iterator<Drawable> iterator = drawables.iterator(); iterator.hasNext(); ) {
             Drawable d = iterator.next();
@@ -222,12 +242,14 @@ public class Main extends JFrame {
                 }
             }
 
-            g2d.drawImage(d.getImage(),
-                    (int) (d.x() - xOffset),
-                    (int) (d.y() - yOffset + d.z()),
-                    (int) d.width(),
-                    (int) d.height(),
-                    null);
+            if (!d.isInvisible()) {
+                g2d.drawImage(d.getImage(),
+                        (int) (d.x() - xOffset),
+                        (int) (d.y() - yOffset + d.z()),
+                        (int) d.width(),
+                        (int) d.height(),
+                        null);
+            }
 
             if (d.toRemove()) iterator.remove();
 

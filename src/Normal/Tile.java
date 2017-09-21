@@ -27,6 +27,8 @@ public class Tile extends Drawable {
         initTile(fileName, x, y, width, height, row, column);
     }
 
+
+
     private void initTile(String fileName, int x, int y, int width, int height, int row, int column) {
         //@FutureProof, this only works if all tiles in a sheet is the same size
         image = Library.loadTile(fileName, column * width, row * height, width, height);

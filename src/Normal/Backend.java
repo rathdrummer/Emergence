@@ -2,6 +2,8 @@ package Normal; /**
  * Created by oskar on 2017-09-12.
  * This classes has some inputs and outputs
  */
+import Tests.PositionListener;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -26,11 +28,12 @@ public class Backend extends JPanel implements ActionListener, MouseListener {
 
     private ActionListener updateListener;
     private DrawListener renderListener;
+    private PositionListener mouseListener;
 
     public Backend(ActionListener updateListener, DrawListener renderListener) {
         addKeyListener(new TAdapter());
         addMouseListener(this);
-        setFocusable(true); // so that we may click on this
+        setFocusable(true); // so that we may addCandidate on this
         setBackground(Color.WHITE);
 
         this.updateListener = updateListener;
@@ -39,6 +42,10 @@ public class Backend extends JPanel implements ActionListener, MouseListener {
         keyDictionary = new HashMap<>();
         commandIsPressedTable = new HashMap<>();
         initKeys();
+    }
+
+    public void setMouseListener(PositionListener m) {
+        this.mouseListener = m;
     }
 
     public void tick(){
@@ -71,7 +78,10 @@ public class Backend extends JPanel implements ActionListener, MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent event) {
-        //just for the actual click event, mouse down often works fine
+        //just for the actual addCandidate event, mouse down often works fine
+        if (mouseListener != null) {
+            mouseListener.onPosition(event.getX(), event.getY());
+        }
     }
 
     @Override
@@ -80,9 +90,10 @@ public class Backend extends JPanel implements ActionListener, MouseListener {
             //event has x and y
             mouseIsPressed = true;
         } else if (SwingUtilities.isRightMouseButton(event)) {
-            //if we want right click
+            //if we want right addCandidate
         }
     }
+
 
     @Override
     public void mouseReleased(MouseEvent event) {
@@ -117,6 +128,7 @@ public class Backend extends JPanel implements ActionListener, MouseListener {
         addKey(32,Keys.SHOOT);      //space
         addKey(68,Keys.DEBUG);      //d
         addKey(90, Keys.PICKUP);    //z
+        addKey(4, Keys.RESTART);
     }
 
     /**
